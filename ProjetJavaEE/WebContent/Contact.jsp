@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +12,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Archive - Marocar</title>
+    <title>Contact - Marocar</title>
 
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/marocar.png">
@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <!--  Login Register Area -->
-                <div class="col-7 col-sm-6">
+                       <div class="col-7 col-sm-6">
                     <div class="signup-search-area d-flex align-items-center justify-content-end">
                         <div class="login_register_area d-flex">
                             <div class="register">
@@ -79,19 +79,19 @@
                 <!-- Logo Area Start -->
                 <div class="col-12">
                     <div class="logo_area text-center">
-                          <img class="yummy-logo" src="img/bg-img/marocar.png"/>
+                        <img class="yummy-logo" src="img/bg-img/marocar.png"/>
                     </div>
                 </div>
             </div>
 
-              <div class="row">
+           <div class="row">
                 <div class="col-12">
                     <nav class="navbar navbar-expand-lg">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#yummyfood-nav" aria-controls="yummyfood-nav" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars" aria-hidden="true"></i> Menu</button>
                         <!-- Menu Area Start -->
                         <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
                             <ul class="navbar-nav" id="yummy-nav">
-                                  <li class="nav-item active">
+                                <li class="nav-item active">
                                     <a class="nav-link" href="ControllerServlet?action=Accueil">Accueil <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
@@ -115,7 +115,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="bradcumb-title text-center">
-                        <h2>Archive Marocar</h2>
+                        <h2>Contact Marocar</h2>
                     </div>
                 </div>
             </div>
@@ -127,8 +127,8 @@
                 <div class="col-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Acceuil</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Page Archive</li>
+                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Accueil</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Contact</li>
                         </ol>
                     </nav>
                 </div>
@@ -137,81 +137,81 @@
     </div>
     <!-- ****** Breadcumb Area End ****** -->
 
-    <!-- ****** Archive Area Start ****** -->
-    <section class="archive-area section_padding_80">
+    <!-- ****** Contatc Area Start ****** -->
+    <div class="contact-area section_padding_80">
         <div class="container">
             <div class="row">
-             <c:forEach items="${model.voitures}" var="p">
-                <!-- Single Post -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-post wow fadeInUp" data-wow-delay="0.1s">
-                        <!-- Post Thumb -->
-                        <div class="post-thumb">
-                            <img height="200" width="300" src="${p.chemin_img }" alt="">
-                        </div>
-                        <!-- Post Content -->
-                        <div class="post-content">
-                            <div class="post-meta d-flex">
-                                <div class="post-author-date-area d-flex">
-                                    <!-- Post Author -->
-                                    <div class="post-author">
-                                        <a href="#">Marocar</a>
-                                    </div>
-                                    <!-- Post Date -->
-                                    <div class="post-date">
-                                        <a href="#">May 19, 2017</a>
-                                    </div>
-                                </div>
-                                <!-- Post Comment & Share Area -->
-                                <div class="post-comment-share-area d-flex">
-                                    <!-- Post Favourite -->
-                                    <div class="post-favourite">
-                                        <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> 10</a>
-                                    </div>
-                                    <!-- Post Comments -->
-                                    <div class="post-comments">
-                                        <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> 12</a>
-                                    </div>
-                                    <!-- Post Share -->
-                                    <div class="post-share">
-                                        <a href="#"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#">
-                                <h4 class="post-headline">${p.marque} ${p.modele} ${p.moteur}</h4>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </c:forEach>
                 <div class="col-12">
-                    <div class="pagination-area d-sm-flex mt-15">
-                        <nav aria-label="#">
-                            <ul class="pagination">
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <div class="page-status">
-                            <p>Page 1 of 60 results</p>
+                    <div class="google-map-area">
+                        <div id="googleMap"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Info Area Start -->
+            <div class="contact-info-area section_padding_80_50">
+                <div class="row">
+                    <!-- Single Contact Info -->
+                    <div class="col-12 col-md-4">
+                        <div class="single-contact-info mb-30 text-center wow fadeInUp" data-wow-delay="0.3s">
+                            <h4>France</h4>
+                            <p>40 Baria Sreet 133/2 NewYork City, US <br> Email: info.contact@gmail.com <br> Phone: 123-456-7890</p>
+                        </div>
+                    </div>
+                    <!-- Single Contact Info -->
+                    <div class="col-12 col-md-4">
+                        <div class="single-contact-info mb-30 text-center wow fadeInUp" data-wow-delay="0.6s">
+                            <h4>United States</h4>
+                            <p>40 Baria Sreet 133/2 NewYork City, US <br> Email: info.contact@gmail.com <br> Phone: 123-456-7890</p>
+                        </div>
+                    </div>
+                    <!-- Single Contact Info -->
+                    <div class="col-12 col-md-4">
+                        <div class="single-contact-info mb-30 text-center wow fadeInUp" data-wow-delay="0.9s">
+                            <h4>Viet Nam</h4>
+                            <p>40 Baria Sreet 133/2 NewYork City, US <br> Email: info.contact@gmail.com <br> Phone: 123-456-7890</p>
                         </div>
                     </div>
                 </div>
-
             </div>
+
+            <!-- Contact Form  -->
+            <div class="contact-form-area">
+                <div class="row">
+                    <div class="col-12 col-md-5">
+                        <div class="contact-form-sidebar item wow fadeInUpBig" data-wow-delay="0.3s" style="background-image: url(img/bg-img/contact.jpg);">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-7 item">
+                        <div class="contact-form wow fadeInUpBig" data-wow-delay="0.6s">
+                            <h2 class="contact-form-title mb-30">If You Have Any Question Contact Me Today !</h2>
+                            <!-- Contact Form -->
+                            <form action="#" method="post">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="contact-name" placeholder="Name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="contact-email" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="contact-website" placeholder="Website">
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+                                </div>
+                                <button type="submit" class="btn contact-btn">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </section>
-    <!-- ****** Archive Area End ****** -->
+    </div>
+    <!-- ****** Contact Area End ****** -->
 
     <!-- ****** Instagram Area Start ****** -->
-   <div class="instargram_area owl-carousel section_padding_100_0 clearfix" id="portfolio">
+  <div class="instargram_area owl-carousel section_padding_100_0 clearfix" id="portfolio">
 
         <!-- Instagram Item -->
          <c:forEach items="${model.voitures}" var="p">
@@ -322,6 +322,9 @@
     <script src="js/bootstrap/bootstrap.min.js"></script>
     <!-- All Plugins JS -->
     <script src="js/others/plugins.js"></script>
+    <!-- Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuyLRa1uKNtbgx6xAJVmWy-zADgegA2s"></script>
+    <script src="js/google-map/map-active.js"></script>
     <!-- Active JS -->
     <script src="js/active.js"></script>
 </body>

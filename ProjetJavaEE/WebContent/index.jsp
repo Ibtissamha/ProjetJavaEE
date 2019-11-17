@@ -29,7 +29,7 @@
     </div>
     <!-- Background Pattern Swither -->
     <div id="pattern-switcher">
-        Bg Pattern
+        Bg Pattern.
     </div>
     <div id="patter-close">
         <i class="fa fa-times" aria-hidden="true"></i>
@@ -75,7 +75,7 @@
                 <!-- Logo Area Start -->
                 <div class="col-12">
                     <div  class="logo_area text-center">
-                    <img height="230" width="230" class="yummy-logo" src="img/bg-img/marocar.png"/>
+                    <img class="yummy-logo" src="img/bg-img/marocar.png"/>
                     </div>
                 </div>
             </div>

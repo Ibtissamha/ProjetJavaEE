@@ -12,7 +12,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Bienvenue nos cher client</title>
+    <title>Bienvenue </title>
 
     <!-- Favicon -->
     <link rel="icon" href="img/bg-img/marocar.png">
@@ -92,7 +92,7 @@
                         <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
                             <ul class="navbar-nav" id="yummy-nav">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="ControllerServlet?action=Accueil">Accueil <span class="sr-only">(current)</span></a>
+                                    <a class="nav-link" href="ControllerServlet?action=Admin">Accueil <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="ControllerServlet?action=Archive">Archive</a>
@@ -128,8 +128,6 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Accueil</a></li>
-                            <li class="breadcrumb-item"><a href="#">Archive</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Single Post Blog</li>
                         </ol>
                     </nav>
                 </div>
@@ -292,87 +290,47 @@
 
                             <!-- Comment Area Start -->
                             <div class="comment_area section_padding_50 clearfix">
-                                <h4 class="mb-30">2 Comments</h4>
-
-                                <ol>
-                                    <!-- Single Comment Area -->
-                                    <li class="single_comment_area">
-                                        <div class="comment-wrapper d-flex">
-                                            <!-- Comment Meta -->
-                                            <div class="comment-author">
-                                                <img src="img/blog-img/17.jpg" alt="">
-                                            </div>
-                                            <!-- Comment Content -->
-                                            <div class="comment-content">
-                                                <span class="comment-date text-muted">27 Aug 2018</span>
-                                                <h5>Brandon Kelley</h5>
-                                                <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
-                                                <a href="#">Like</a>
-                                                <a class="active" href="#">Reply</a>
-                                            </div>
-                                        </div>
-                                        <ol class="children">
-                                            <li class="single_comment_area">
-                                                <div class="comment-wrapper d-flex">
-                                                    <!-- Comment Meta -->
-                                                    <div class="comment-author">
-                                                        <img src="img/blog-img/18.jpg" alt="">
-                                                    </div>
-                                                    <!-- Comment Content -->
-                                                    <div class="comment-content">
-                                                        <span class="comment-date text-muted">27 Aug 2018</span>
-                                                        <h5>Brandon Kelley</h5>
-                                                        <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
-                                                        <a href="#">Like</a>
-                                                        <a class="active" href="#">Reply</a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ol>
-                                    </li>
-                                    <li class="single_comment_area">
-                                        <div class="comment-wrapper d-flex">
-                                            <!-- Comment Meta -->
-                                            <div class="comment-author">
-                                                <img src="img/blog-img/19.jpg" alt="">
-                                            </div>
-                                            <!-- Comment Content -->
-                                            <div class="comment-content">
-                                                <span class="comment-date text-muted">27 Aug 2018</span>
-                                                <h5>Brandon Kelley</h5>
-                                                <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
-                                                <a href="#">Like</a>
-                                                <a class="active" href="#">Reply</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ol>
-                            </div>
-
-                            <!-- Leave A Comment -->
-                            <div class="leave-comment-area section_padding_50 clearfix">
-                                <div class="comment-form">
-                                    <h4 class="mb-30">Leave A Comment</h4>
-
-                                    <!-- Comment Form -->
-                                    <form action="#" method="post">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="contact-name" placeholder="Name">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" id="contact-email" placeholder="Email">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="contact-website" placeholder="Website">
-                                        </div>
-                                        <div class="form-group">
-                                            <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
-                                        </div>
-                                        <button type="submit" class="btn contact-btn">Post Comment</button>
-                                    </form>
-                                </div>
-                            </div>
-
+                                <h4 class="mb-30">Visualiser les clients </h4>
+                        <table class="table table-striped">
+                            <tr>
+                            <th>IdClient</th>  <th>Nom</th>  <th>Prenom</th> <th>CIN</th> <th>Adresse</th> <th>Tel</th> <th>Login</th> <th>Password</th> <th>Modifier</th> <th>Supprimer</th>
+                            </tr>
+                           <c:forEach items="${model.clients}" var="p">
+                            <tr>
+                             <td>${p.IdClient}</td> 
+                             <td>${p.nom}</td> 
+                             <td>${p.prenom}</td> 
+                             <td>${p.cin}</td> 
+                             <td>${p.adresse}</td> 
+                             <td>${p.tel}</td> 
+                             <td>${p.login}</td> 
+                             <td>${p.password}</td> 
+                             <td><a href="javascript:confirmer('ControleurServlet?action=edit&ref=${p.reference }')">Modifier</a></td>
+                             <td><a href="javascript:confirmer('ControleurServlet?action=delete&ref=${p.reference }')">Supprimer</a></td>
+                            </tr>
+                           </c:forEach>
+                       </table>
+                            </div><br>
+                            <h4 class="mb-30">Visualiser les managers </h4>
+                               <table class="table table-striped">
+                            <tr>
+                            <th>IdManager</th>  <th>Nom</th>  <th>Prenom</th> <th>CIN</th> <th>Login</th> <th>Password</th> <th>NCarteCredit</th> <th>PermisConduite</th> <th>Modifier</th> <th>Supprimer</th>
+                            </tr>
+                           <c:forEach items="${model.managers}" var="p">
+                            <tr>
+                             <td>${p.IdManager}</td> 
+                             <td>${p.nom}</td> 
+                             <td>${p.prenom}</td> 
+                             <td>${p.cin}</td> 
+                             <td>${p.login}</td> 
+                             <td>${p.password}</td> 
+                             <td>NCarteCredit</td>
+                             <td>PermisConduite</td>
+                             <td><a href="javascript:confirmer('ControleurServlet?action=edit&ref=${p.reference }')">Modifier</a></td>
+                             <td><a href="javascript:confirmer('ControleurServlet?action=delete&ref=${p.reference }')">Supprimer</a></td>
+                            </tr>
+                           </c:forEach>
+                       </table>
                         </div>
                     </div>
                 </div>
@@ -519,7 +477,7 @@
                             <div class="collapse navbar-collapse justify-content-center" id="yummyfood-footer-nav">
                                 <ul class="navbar-nav">
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="ControllerServlet?action=Accueil">Accueil <span class="sr-only">(current)</span></a>
+                                        <a class="nav-link" href="ControllerServlet?action=Admin">Accueil <span class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="ControllerServlet?action=Archive">Archive</a>

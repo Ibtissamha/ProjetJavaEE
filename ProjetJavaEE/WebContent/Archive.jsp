@@ -78,8 +78,8 @@
             <div class="row">
                 <!-- Logo Area Start -->
                 <div class="col-12">
-                    <div class="logo_area text-center">
-                          <img class="yummy-logo" src="img/bg-img/marocar.png"/>
+                    <div class=" text-center">
+                          <img height="250" width="380"  src="img/bg-img/marocar.png"/>
                     </div>
                 </div>
             </div>

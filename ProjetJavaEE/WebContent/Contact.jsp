@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+ <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,8 +78,8 @@
             <div class="row">
                 <!-- Logo Area Start -->
                 <div class="col-12">
-                    <div class="logo_area text-center">
-                        <img class="yummy-logo" src="img/bg-img/marocar.png"/>
+                    <div class=" text-center">
+                        <img height="250" width="380"  src="img/bg-img/marocar.png"/>
                     </div>
                 </div>
             </div>
@@ -138,69 +138,65 @@
     <!-- ****** Breadcumb Area End ****** -->
 
     <!-- ****** Contatc Area Start ****** -->
-    <div class="contact-area section_padding_80">
+    <div class="google-map-area section_padding_80">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="google-map-area">
-                        <div id="googleMap"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contact Info Area Start -->
-            <div class="contact-info-area section_padding_80_50">
-                <div class="row">
-                    <!-- Single Contact Info -->
-                    <div class="col-12 col-md-4">
-                        <div class="single-contact-info mb-30 text-center wow fadeInUp" data-wow-delay="0.3s">
-                            <h4>France</h4>
-                            <p>40 Baria Sreet 133/2 NewYork City, US <br> Email: info.contact@gmail.com <br> Phone: 123-456-7890</p>
-                        </div>
-                    </div>
-                    <!-- Single Contact Info -->
-                    <div class="col-12 col-md-4">
-                        <div class="single-contact-info mb-30 text-center wow fadeInUp" data-wow-delay="0.6s">
-                            <h4>United States</h4>
-                            <p>40 Baria Sreet 133/2 NewYork City, US <br> Email: info.contact@gmail.com <br> Phone: 123-456-7890</p>
-                        </div>
-                    </div>
-                    <!-- Single Contact Info -->
-                    <div class="col-12 col-md-4">
-                        <div class="single-contact-info mb-30 text-center wow fadeInUp" data-wow-delay="0.9s">
-                            <h4>Viet Nam</h4>
-                            <p>40 Baria Sreet 133/2 NewYork City, US <br> Email: info.contact@gmail.com <br> Phone: 123-456-7890</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contact Form  -->
+                       <iframe style="position:absolute; " src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2078.5089091398427!2d-5.566653987515008!3d33.88560787717547!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda05ad24c192177%3A0x9ad5c0acae832ab0!2slocation%20de%20voiture%20Mekn%C3%A8s%20myscar!5e0!3m2!1sfr!2sma!4v1574085039952!5m2!1sfr!2sma" width="550" height="600" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+               <!-- Contact Form  -->
             <div class="contact-form-area">
                 <div class="row">
-                    <div class="col-12 col-md-5">
+                    <div class="col-12 col-md-6">
                         <div class="contact-form-sidebar item wow fadeInUpBig" data-wow-delay="0.3s" style="background-image: url(img/bg-img/contact.jpg);">
                         </div>
                     </div>
-                    <div class="col-12 col-md-7 item">
+                    <div class="col-10 col-md-6 ">
                         <div class="contact-form wow fadeInUpBig" data-wow-delay="0.6s">
-                            <h2 class="contact-form-title mb-30">If You Have Any Question Contact Me Today !</h2>
+                            <h2 class="contact-form-title mb-30">Si vous avez des questions contacter nous !</h2>
                             <!-- Contact Form -->
                             <form action="#" method="post">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="contact-name" placeholder="Name">
+                                    <input type="text" class="form-control" id="contact-name" placeholder="Nom">
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control" id="contact-email" placeholder="Email">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="contact-website" placeholder="Website">
+                                    <input type="text" class="form-control" id="contact-website" placeholder="Objet">
                                 </div>
                                 <div class="form-group">
                                     <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
                                 </div>
-                                <button type="submit" class="btn contact-btn">Send Message</button>
+                                <button type="submit" class="btn contact-btn">Envoyer Message</button>
                             </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- Contact Info Area Start -->
+            <div style=" padding-left: 80px;" class="contact-info-area section_padding_80_50">
+                <div class="row">
+                    <!-- Single Contact Info -->
+                    <div class="col-12 col-md-4 ">
+                        <div class="single-contact-info mb-30 text-center wow fadeInUp" data-wow-delay="0.3s">
+                            <h4>Meknes</h4>
+                            <p>40 Hamrya Mohammed5 ,Meknes  <br> Email:salim.contact@gmail.com <br> Phone: 0596874123</p>
+                        </div>
+                    </div>
+                    <!-- Single Contact Info -->
+                    <div class="col-12 col-md-4">
+                        <div class="single-contact-info mb-30 text-center wow fadeInUp" data-wow-delay="0.6s">
+                            <h4>Fes</h4>
+                            <p>22 Baria Sreet 133/2 FES, Narjis <br> Email:Ibtissam.contact@gmail.com <br> Phone: 0598741563</p>
+                        </div>
+                    </div>
+                    <!-- Single Contact Info -->
+                    <div class="col-12 col-md-4">
+                        <div class="single-contact-info mb-30 text-center wow fadeInUp" data-wow-delay="0.9s">
+                            <h4>Casa</h4>
+                            <p>36 Ain chok 133/2 Casa, US <br> Email:Marocar.cont@gmail.com <br> Phone: 0521478963</p>
                         </div>
                     </div>
                 </div>

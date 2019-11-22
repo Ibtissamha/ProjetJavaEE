@@ -53,10 +53,11 @@ public class ControllerServlet extends HttpServlet {
 		}
 		else if(action.equals("Admin"))
 		{
-			List<Manager> manages=metier.listManagers();
-			model.setManagers(manages);
+			List<Manager> managers=metier.listManagers();
+			model.setManagers(managers);
 			List<Client> clients=metier.listClient();
 			model.setClients(clients);
+			request.setAttribute("model", model);
 			request.getRequestDispatcher("VueAdmin.jsp").forward(request, response);
 		}
 		else {

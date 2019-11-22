@@ -3,7 +3,9 @@
      <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
-
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -79,7 +81,7 @@
                 <!-- Logo Area Start -->
                 <div class="col-12">
                     <div  class="text-center">
-                    <img  height="250" width="380"  src="img/bg-img/marocar.png"/>
+                    <img  height="230" width="380"  src="img/bg-img/marocar.png"/>
                     </div>
                 </div>
                 </div>
@@ -158,7 +160,7 @@
                 <div class="col-5 col-sm-6">
                             <div class="top_social_bar">
                                <b style="color:#FF4500"><a ><i class="fa fa-tags" aria-hidden="true"></i></a></b>
-                          <h6 style="color:gray"><spam>&nbsp&nbsp&nbsp</spam> <u> Recherche des Voitures :</u></h6>
+                          <h5 ><span>&nbsp&nbsp&nbsp</span><u style="color:#FF4500"> Recherche des Voitures :</u></h5>
                     </div>
                 </div>
                 <!--  Login Register Area -->
@@ -290,47 +292,79 @@
 
                             <!-- Comment Area Start -->
                             <div class="comment_area section_padding_50 clearfix">
-                                <h4 class="mb-30">Visualiser les clients </h4>
-                        <table class="table table-striped">
+                                 <div class="single-widget-area about-me-widget text-center">
+                            <div class="widget-title">
+                                <h6>Visualiser les clients </h6>
+                            </div>
+                                </div>
+                         <table id="mytable" class="table-responsive table table-bordred table-striped">
                             <tr>
                             <th>IdClient</th>  <th>Nom</th>  <th>Prenom</th> <th>CIN</th> <th>Adresse</th> <th>Tel</th> <th>Login</th> <th>Password</th> <th>Modifier</th> <th>Supprimer</th>
                             </tr>
                            <c:forEach items="${model.clients}" var="p">
                             <tr>
-                             <td>${p.IdClient}</td> 
+                             <td>${p.idClient}</td> 
                              <td>${p.nom}</td> 
                              <td>${p.prenom}</td> 
-                             <td>${p.cin}</td> 
+                             <td>${p.CIN}</td> 
                              <td>${p.adresse}</td> 
                              <td>${p.tel}</td> 
                              <td>${p.login}</td> 
                              <td>${p.password}</td> 
-                             <td><a href="javascript:confirmer('ControleurServlet?action=edit&ref=${p.reference }')">Modifier</a></td>
-                             <td><a href="javascript:confirmer('ControleurServlet?action=delete&ref=${p.reference }')">Supprimer</a></td>
-                            </tr>
+                           <td><p data-placement="top" data-toggle="tooltip" title="EditC"><button class="btn btn-primary btn-xs" data-title="EditC" data-toggle="modal" data-target="#editC" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                           <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                           </tr>
                            </c:forEach>
-                       </table>
-                            </div><br>
-                            <h4 class="mb-30">Visualiser les managers </h4>
-                               <table class="table table-striped">
+                       </table> 
+                       <div class="clearfix"></div>
+<ol class="pagination pull-right">
+  <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+  <li class="active"><a href="#">1</a></li>
+  <li><a href="#">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">4</a></li>
+  <li><a href="#">5</a></li>
+  <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li><br>
+</ol>
+  <p style="margin-top:50px; margin-left:444px;" data-placement="top" data-toggle="tooltip" title="AjouterC"><button class="btn  btn-outline-secondary btn-lg btn-block" data-title="AjouterC" data-toggle="modal" data-target="#AjouterC" ><span class="glyphicon glyphicon-plus"></span><span>&nbsp&nbsp</span>Ajouter</button></p>
+
+                         </div><br>
+                             <div class="single-widget-area about-me-widget text-center">
+                            <div class="widget-title">
+                                <h6>Visualiser les managers </h6>
+                            </div>
+                                </div>
+                               <table id="mytable" class="table-responsive table table-bordred table-striped" >
                             <tr>
                             <th>IdManager</th>  <th>Nom</th>  <th>Prenom</th> <th>CIN</th> <th>Login</th> <th>Password</th> <th>NCarteCredit</th> <th>PermisConduite</th> <th>Modifier</th> <th>Supprimer</th>
                             </tr>
                            <c:forEach items="${model.managers}" var="p">
                             <tr>
-                             <td>${p.IdManager}</td> 
+                             <td>${p.idManager}</td> 
                              <td>${p.nom}</td> 
                              <td>${p.prenom}</td> 
-                             <td>${p.cin}</td> 
+                             <td>${p.CIN}</td> 
                              <td>${p.login}</td> 
                              <td>${p.password}</td> 
-                             <td>NCarteCredit</td>
-                             <td>PermisConduite</td>
-                             <td><a href="javascript:confirmer('ControleurServlet?action=edit&ref=${p.reference }')">Modifier</a></td>
-                             <td><a href="javascript:confirmer('ControleurServlet?action=delete&ref=${p.reference }')">Supprimer</a></td>
-                            </tr>
+                             <td>${p.NCarteCredit}</td>
+                             <td>${p.permisConduite}</td>
+                           <td><p data-placement="top" data-toggle="tooltip" title="EditM"><button class="btn btn-primary btn-xs" data-title="EditM" data-toggle="modal" data-target="#editM" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                           <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                           </tr>
                            </c:forEach>
                        </table>
+                         <div class="clearfix"></div>
+<ol class="pagination pull-right">
+  <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+  <li class="active"><a href="#">1</a></li>
+  <li><a href="#">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">4</a></li>
+  <li><a href="#">5</a></li>
+  <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+</ol>
+ <p style="margin-top:50px; margin-left:444px;" data-placement="top" data-toggle="tooltip" title="AjouterM"><button class="btn  btn-outline-secondary btn-lg btn-block" data-title="AjouterM" data-toggle="modal" data-target="#AjouterM" ><span class="glyphicon glyphicon-plus"></span><span>&nbsp&nbsp</span>Ajouter</button></p>
+
                         </div>
                     </div>
                 </div>
@@ -338,16 +372,7 @@
                 <!-- ****** Blog Sidebar ****** -->
                 <div class="col-12 col-sm-8 col-md-6 col-lg-4">
                     <div class="blog-sidebar mt-5 mt-lg-0">
-                        <!-- Single Widget Area -->
-                        <div class="single-widget-area about-me-widget text-center">
-                            <div class="widget-title">
-                                <h6>RESERVATION </h6>
-                            </div>
-                            Salim ici on va faire le tableau de reservation (un client peut faire sa reservation on saisissant l'ID du vehicule 
-                            choisi ainsi que la date de depart et la date de retour )
-                        </div>
-
-                        
+                   
                         <!-- Single Widget Area -->
                         <div class="single-widget-area popular-post-widget">
                             <div class="widget-title text-center">
@@ -504,8 +529,197 @@
             </div>
         </div>
     </footer>
+    
+<div class="modal fade" id="editC" tabindex="-1" role="dialog" aria-labelledby="editC" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Modifier ce client</h4>
+      </div>
+          <div class="modal-body">
+           <div class="form-group">
+        <input class="form-control" type="text" placeholder="IdClient" disabled>
+        </div>
+          <div class="form-group">
+        <input class="form-control" type="text" placeholder="Nom">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="Prenom">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="CIN">
+        </div>
+        <div class="form-group">
+        <textarea rows="2" class="form-control" placeholder="Adresse"></textarea>
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="Tel">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="Login">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="Password">
+        </div>
+      </div>
+          <div class="modal-footer ">
+        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Modifier</button>
+      </div>
+        </div>
+    <!-- /.modal-content --> 
+  </div>
+  </div>
+  
+      
+<div class="modal fade" id="editM" tabindex="-1" role="dialog" aria-labelledby="editM" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Modifier ce manager</h4>
+      </div>
+          <div class="modal-body">
+            <div class="form-group">
+        <input class="form-control" type="text" placeholder="IdManager" disabled>
+        </div>
+          <div class="form-group">
+        <input class="form-control" type="text" placeholder="Nom">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="Prenom">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="CIN">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="Login">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="Password">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="NCarteCredis">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="PermisConduite">
+        </div>
+      </div>
+          <div class="modal-footer ">
+        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Modifier</button>
+      </div>
+        </div>
+    <!-- /.modal-content --> 
+  </div>
+  </div>
+  
+  
+  
+   <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Supprimer cette element</h4>
+      </div>
+          <div class="modal-body">
+       
+       <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Vous etes sur que vous voulez supprimer?</div>
+       
+      </div>
+        <div class="modal-footer ">
+        <button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Oui</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Non</button>
+      </div>
+        </div>
+    <!-- /.modal-content --> 
+  </div>
+      <!-- /.modal-dialog --> 
+    </div>
     <!-- ****** Footer Menu Area End ****** -->
 
+<div class="modal fade" id="AjouterC" tabindex="-1" role="dialog" aria-labelledby="AjouterC" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Ajouter un client</h4>
+      </div>
+          <div class="modal-body">
+          <div class="form-group">
+        <input class="form-control" type="text" placeholder="IdClient" disabled>
+        </div>
+          <div class="form-group">
+        <input class="form-control" type="text" placeholder="Nom">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="Prenom">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="CIN">
+        </div>
+        <div class="form-group">
+        <textarea rows="2" class="form-control" placeholder="Adresse"></textarea>
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="Tel">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="Login">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="Password">
+        </div>
+      </div>
+          <div class="modal-footer ">
+        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Ajouter</button>
+      </div>
+        </div>
+    <!-- /.modal-content --> 
+  </div>
+  </div>
+  
+  
+<div class="modal fade" id="AjouterM" tabindex="-1" role="dialog" aria-labelledby="AjouterM" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Ajouter un manager</h4>
+      </div>
+          <div class="modal-body">
+          <div class="form-group">
+        <input class="form-control" type="text" placeholder="IdManager" disabled>
+        </div>
+          <div class="form-group">
+        <input class="form-control" type="text" placeholder="Nom">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="Prenom">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="CIN">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="Login">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="Password">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="NCarteCredis">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" placeholder="PermisConduite">
+        </div>
+      </div>
+          <div class="modal-footer ">
+        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Ajouter</button>
+      </div>
+        </div>
+    <!-- /.modal-content --> 
+  </div>
+  </div>
     <!-- Jquery-2.2.4 js -->
     <script src="js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->

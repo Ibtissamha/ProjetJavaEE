@@ -63,7 +63,7 @@ public class metierimpl implements Imetier{
 		List<Voiture> voit=new ArrayList<Voiture>();
 		Connection conn=SingletonConnection.getConnection();
 		try {
-			PreparedStatement vs=conn.prepareStatement("select * from voiture where solde != 0");
+			PreparedStatement vs=conn.prepareStatement("select * from voiture where solde != 0 LIMIT 4");
 			ResultSet rs=vs.executeQuery();
 			while(rs.next()) {
 				Voiture v=new Voiture();
@@ -94,13 +94,13 @@ public class metierimpl implements Imetier{
 			ResultSet rs=vs.executeQuery();
 			while(rs.next()) {
 				Manager M=new Manager();
-				M.setIdmanager(rs.getInt("IdManager"));
+				M.setIdManager(rs.getInt("IdManager"));
 				M.setNom(rs.getString("Nom"));
 				M.setPrenom(rs.getString("Prenom"));
 				M.setLogin(rs.getString("Login"));
 				M.setPassword(rs.getString("Password"));
-				M.setCin(rs.getString("CIN"));
-				M.setNCartecredit(rs.getString("NCarteCredit"));
+				M.setCIN(rs.getString("CIN"));
+				M.setNCarteCredit(rs.getString("NCarteCredit"));
 				M.setPermisConduite(rs.getString("PermisConduite"));
 				Man.add(M);
 			}
@@ -123,11 +123,11 @@ public class metierimpl implements Imetier{
 				C.setIdClient(rs.getInt("IdClient"));
 				C.setNom(rs.getString("Nom"));
 				C.setPrenom(rs.getString("Prenom"));
-				C.setLogin(rs.getString("Login"));
-				C.setPassword(rs.getString("Password"));
-				C.setCin(rs.getString("CIN"));
+				C.setCIN(rs.getString("CIN"));
 				C.setAdresse(rs.getString("Adresse"));
 				C.setTel(rs.getInt("Tel"));
+				C.setLogin(rs.getString("Login"));
+				C.setPassword(rs.getString("Password"));
 				Cl.add(C);
 			}
 			vs.close();

@@ -4,80 +4,81 @@ import java.io.Serializable;
 
 public class Manager implements Serializable {
 	private static final long serialVersionUID = 1L;
-	public int 	Idmanager;
-	public String nom;
-	public String prenom;
-	public String login;
-	public String password;
-	public String cin;
-	public String NCartecredit;
-	public String permisConduite;
-	public Manager() {
-		super();
-		// TODO Auto-generated constructor stub
+	public int 	IdManager;
+	public String Nom;
+	public String Prenom;
+	public String Login;
+	public String Password;
+	public String CIN;
+	public String NCarteCredit;
+	public String PermisConduite;
+	public int getIdManager() {
+		return IdManager;
 	}
-	public Manager(int idmanager, String nom, String prenom, String login, String password, String cin,
-			String nCartecredit, String permisConduite) {
-		super();
-		Idmanager = idmanager;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.login = login;
-		this.password = password;
-		this.cin = cin;
-		NCartecredit = nCartecredit;
-		this.permisConduite = permisConduite;
-	}
-	public int getIdmanager() {
-		return Idmanager;
-	}
-	public void setIdmanager(int idmanager) {
-		Idmanager = idmanager;
+	public void setIdManager(int idManager) {
+		IdManager = idManager;
 	}
 	public String getNom() {
-		return nom;
+		return Nom;
 	}
 	public void setNom(String nom) {
-		this.nom = nom;
+		Nom = nom;
 	}
 	public String getPrenom() {
-		return prenom;
+		return Prenom;
 	}
 	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+		Prenom = prenom;
 	}
 	public String getLogin() {
-		return login;
+		return Login;
 	}
 	public void setLogin(String login) {
-		this.login = login;
+		Login = login;
 	}
 	public String getPassword() {
-		return password;
+		return Password;
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		Password = password;
 	}
-	public String getCin() {
-		return cin;
+	public String getCIN() {
+		return CIN;
 	}
-	public void setCin(String cin) {
-		this.cin = cin;
+	public void setCIN(String cIN) {
+		CIN = cIN;
 	}
-	public String getNCartecredit() {
-		return NCartecredit;
+	public String getNCarteCredit() {
+		return NCarteCredit;
 	}
-	public void setNCartecredit(String nCartecredit) {
-		NCartecredit = nCartecredit;
+	public void setNCarteCredit(String nCarteCredit) {
+		NCarteCredit = nCarteCredit;
 	}
 	public String getPermisConduite() {
-		return permisConduite;
+		return PermisConduite;
 	}
 	public void setPermisConduite(String permisConduite) {
-		this.permisConduite = permisConduite;
+		PermisConduite = permisConduite;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
+	public Manager(int idManager, String nom, String prenom, String login, String password, String cIN,
+			String nCarteCredit, String permisConduite) {
+		super();
+		IdManager = idManager;
+		Nom = nom;
+		Prenom = prenom;
+		Login = login;
+		Password = password;
+		CIN = cIN;
+		NCarteCredit = nCarteCredit;
+		PermisConduite = permisConduite;
+	}
+	public Manager() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 }
+	
+	

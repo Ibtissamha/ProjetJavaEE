@@ -4,80 +4,79 @@ import java.io.Serializable;
 
 public class Client implements Serializable{
 	private static final long serialVersionUID = 1L;
-	public int idClient;
-	public String nom;
-	public String prenom;
-	public String cin;
-	public String adresse;
-	public int tel;
-	public String login;
-	public String password;
-	public Client(int idClient, String nom, String prenom, String cin, String adresse, int tel, String login,
+	public int IdClient;
+	public String Nom;
+	public String Prenom;
+	public String CIN;
+	public String Adresse;
+	public int Tel;
+	public String Login;
+	public String Password;
+	public int getIdClient() {
+		return IdClient;
+	}
+	public void setIdClient(int idClient) {
+		IdClient = idClient;
+	}
+	public String getNom() {
+		return Nom;
+	}
+	public void setNom(String nom) {
+		Nom = nom;
+	}
+	public String getPrenom() {
+		return Prenom;
+	}
+	public void setPrenom(String prenom) {
+		Prenom = prenom;
+	}
+	public String getCIN() {
+		return CIN;
+	}
+	public void setCIN(String cIN) {
+		CIN = cIN;
+	}
+	public String getAdresse() {
+		return Adresse;
+	}
+	public void setAdresse(String adresse) {
+		Adresse = adresse;
+	}
+	public int getTel() {
+		return Tel;
+	}
+	public void setTel(int tel) {
+		Tel = tel;
+	}
+	public String getLogin() {
+		return Login;
+	}
+	public void setLogin(String login) {
+		Login = login;
+	}
+	public String getPassword() {
+		return Password;
+	}
+	public void setPassword(String password) {
+		Password = password;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	public Client(int idClient, String nom, String prenom, String cIN, String adresse, int tel, String login,
 			String password) {
 		super();
-		this.idClient = idClient;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.cin = cin;
-		this.adresse = adresse;
-		this.tel = tel;
-		this.login = login;
-		this.password = password;
+		IdClient = idClient;
+		Nom = nom;
+		Prenom = prenom;
+		CIN = cIN;
+		Adresse = adresse;
+		Tel = tel;
+		Login = login;
+		Password = password;
 	}
 	public Client() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public int getIdClient() {
-		return idClient;
-	}
-	public void setIdClient(int idClient) {
-		this.idClient = idClient;
-	}
-	public String getNom() {
-		return nom;
-	}
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-	public String getPrenom() {
-		return prenom;
-	}
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-	public String getCin() {
-		return cin;
-	}
-	public void setCin(String cin) {
-		this.cin = cin;
-	}
-	public String getAdresse() {
-		return adresse;
-	}
-	public void setAdresse(String adresse) {
-		this.adresse = adresse;
-	}
-	public int getTel() {
-		return tel;
-	}
-	public void setTel(int tel) {
-		this.tel = tel;
-	}
-	public String getLogin() {
-		return login;
-	}
-	public void setLogin(String login) {
-		this.login = login;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 }

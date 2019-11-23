@@ -1,9 +1,7 @@
 package metier;
+import metier.Password;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -126,8 +124,6 @@ public class metierimpl implements Imetier{
 				C.setCIN(rs.getString("CIN"));
 				C.setAdresse(rs.getString("Adresse"));
 				C.setTel(rs.getInt("Tel"));
-				C.setLogin(rs.getString("Login"));
-				C.setPassword(rs.getString("Password"));
 				Cl.add(C);
 			}
 			vs.close();
@@ -135,6 +131,19 @@ public class metierimpl implements Imetier{
 			e.printStackTrace();
 		}
 		return Cl;
+	}
+	public void createAdmin()
+	{
+		Connection con=SingletonConnection.getConnection();
+		String pass=Password.hash("admin");
+		try {
+			Statement st=con.createStatement();
+			st.executeUpdate("insert into user(username,password,role) values('admin@gmail.com','"+pass+"',3);");
+			st.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

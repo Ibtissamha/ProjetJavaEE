@@ -8,5 +8,6 @@ public interface Imetier {
 	public List<Voiture> listVoituresSolde();
 	public List<Manager> listManagers();
 	public List<Client> listClient();
+	public void createAdmin();
 	
 }

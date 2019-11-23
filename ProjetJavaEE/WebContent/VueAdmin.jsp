@@ -299,7 +299,7 @@
                                 </div>
                          <table id="mytable" class="table-responsive table table-bordred table-striped">
                             <tr>
-                            <th>IdClient</th>  <th>Nom</th>  <th>Prenom</th> <th>CIN</th> <th>Adresse</th> <th>Tel</th> <th>Login</th> <th>Password</th> <th>Modifier</th> <th>Supprimer</th>
+                            <th>IdClient</th>  <th>Nom</th>  <th>Prenom</th> <th>CIN</th> <th>Adresse</th> <th>Tel</th><th>Modifier</th> <th>Supprimer</th>
                             </tr>
                            <c:forEach items="${model.clients}" var="p">
                             <tr>
@@ -308,9 +308,7 @@
                              <td>${p.prenom}</td> 
                              <td>${p.CIN}</td> 
                              <td>${p.adresse}</td> 
-                             <td>${p.tel}</td> 
-                             <td>${p.login}</td> 
-                             <td>${p.password}</td> 
+                             <td>${p.tel}</td>  
                            <td><p data-placement="top" data-toggle="tooltip" title="EditC"><button class="btn btn-primary btn-xs" data-title="EditC" data-toggle="modal" data-target="#editC" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
                            <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
                            </tr>

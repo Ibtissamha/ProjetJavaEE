@@ -160,7 +160,7 @@
                 <div class="col-5 col-sm-6">
                             <div class="top_social_bar">
                                <b style="color:#FF4500"><a ><i class="fa fa-tags" aria-hidden="true"></i></a></b>
-                          <h5 ><span>&nbsp&nbsp&nbsp</span><u style="color:#FF4500"> Recherche des Voitures :</u></h5>
+                          <h4 ><span>&nbsp&nbsp&nbsp</span><u style="color:#FF4500"> Recherche des Voitures :</u></h4>
                     </div>
                 </div>
                 <!--  Login Register Area -->
@@ -299,7 +299,7 @@
                                 </div>
                          <table id="mytable" class="table-responsive table table-bordred table-striped">
                             <tr>
-                            <th>IdClient</th>  <th>Nom</th>  <th>Prenom</th> <th>CIN</th> <th>Adresse</th> <th>Tel</th><th>Modifier</th> <th>Supprimer</th>
+                            <th>IdClient</th>  <th>Nom</th>  <th>Prenom</th> <th>CIN</th> <th>Adresse</th> <th>Tel</th> <th>Modifier</th> <th>Supprimer</th>
                             </tr>
                            <c:forEach items="${model.clients}" var="p">
                             <tr>
@@ -308,9 +308,9 @@
                              <td>${p.prenom}</td> 
                              <td>${p.CIN}</td> 
                              <td>${p.adresse}</td> 
-                             <td>${p.tel}</td>  
+                             <td>${p.tel}</td> 
                            <td><p data-placement="top" data-toggle="tooltip" title="EditC"><button class="btn btn-primary btn-xs" data-title="EditC" data-toggle="modal" data-target="#editC" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                           <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                           <td><p data-placement="top" data-toggle="tooltip" title="Delete"><a  href="ControllerServlet?action=deleteC&id=${p.idClient }" class="btn btn-danger btn-xs delete" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></a></p></td>
                            </tr>
                            </c:forEach>
                        </table> 
@@ -334,21 +334,19 @@
                                 </div>
                                <table id="mytable" class="table-responsive table table-bordred table-striped" >
                             <tr>
-                            <th>IdManager</th>  <th>Nom</th>  <th>Prenom</th> <th>CIN</th> <th>Login</th> <th>Password</th> <th>NCarteCredit</th> <th>PermisConduite</th> <th>Modifier</th> <th>Supprimer</th>
-                            </tr>
+                            <th>IdManager</th>  <th>Nom</th>  <th>Prenom</th> <th>CIN</th> <th>NCarteCredit</th> <th>PermisConduite</th> <th>Modifier</th> <th>Supprimer</th>
+                            </tr> 
                            <c:forEach items="${model.managers}" var="p">
                             <tr>
                              <td>${p.idManager}</td> 
                              <td>${p.nom}</td> 
                              <td>${p.prenom}</td> 
-                             <td>${p.CIN}</td> 
-                             <td>${p.login}</td> 
-                             <td>${p.password}</td> 
+                             <td>${p.CIN}</td>
                              <td>${p.NCarteCredit}</td>
                              <td>${p.permisConduite}</td>
-                           <td><p data-placement="top" data-toggle="tooltip" title="EditM"><button class="btn btn-primary btn-xs" data-title="EditM" data-toggle="modal" data-target="#editM" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                           <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
-                           </tr>
+                            <td><p data-placement="top" data-toggle="tooltip" title="EditM"><button class="btn btn-primary btn-xs" data-title="EditM" data-toggle="modal" data-target="#editM" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                           <td><p data-placement="top" data-toggle="tooltip"  title="Delete"><a  href="ControllerServlet?action=deleteM&id=${p.idManager }" class="btn btn-danger btn-xs delete" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></a></p></td>
+                          </tr>
                            </c:forEach>
                        </table>
                          <div class="clearfix"></div>
@@ -554,12 +552,6 @@
         <div class="form-group">
         <input class="form-control " type="text" placeholder="Tel">
         </div>
-        <div class="form-group">
-        <input class="form-control " type="text" placeholder="Login">
-        </div>
-        <div class="form-group">
-        <input class="form-control " type="text" placeholder="Password">
-        </div>
       </div>
           <div class="modal-footer ">
         <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Modifier</button>
@@ -591,12 +583,6 @@
         <input class="form-control " type="text" placeholder="CIN">
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" placeholder="Login">
-        </div>
-        <div class="form-group">
-        <input class="form-control " type="text" placeholder="Password">
-        </div>
-        <div class="form-group">
         <input class="form-control " type="text" placeholder="NCarteCredis">
         </div>
         <div class="form-group">
@@ -626,8 +612,8 @@
        
       </div>
         <div class="modal-footer ">
-        <button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Oui</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Non</button>
+        <button type="button" class="btn btn-success" id="confirmModalYes"><span class="glyphicon glyphicon-ok-sign"></span> Oui</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="confirmModalYes"><span class="glyphicon glyphicon-remove"></span> Non</button>
       </div>
         </div>
     <!-- /.modal-content --> 
@@ -643,35 +629,31 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
         <h4 class="modal-title custom_align" id="Heading">Ajouter un client</h4>
       </div>
+       <form action="ControllerServlet" method="Post">
           <div class="modal-body">
           <div class="form-group">
-        <input class="form-control" type="text" placeholder="IdClient" disabled>
+        <input class="form-control" type="text" name="IdClient" placeholder="IdClient" disabled>
         </div>
           <div class="form-group">
-        <input class="form-control" type="text" placeholder="Nom">
+        <input class="form-control" type="text" name="Nom" placeholder="Nom">
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" placeholder="Prenom">
+        <input class="form-control " type="text" name="Prenom" placeholder="Prenom">
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" placeholder="CIN">
+        <input class="form-control " type="text" name="CIN" placeholder="CIN">
         </div>
         <div class="form-group">
-        <textarea rows="2" class="form-control" placeholder="Adresse"></textarea>
+        <textarea rows="2" class="form-control" name="Adresse" placeholder="Adresse"></textarea>
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" placeholder="Tel">
-        </div>
-        <div class="form-group">
-        <input class="form-control " type="text" placeholder="Login">
-        </div>
-        <div class="form-group">
-        <input class="form-control " type="text" placeholder="Password">
+        <input class="form-control " type="text" name="Tel" placeholder="Tel">
         </div>
       </div>
           <div class="modal-footer ">
-        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Ajouter</button>
+        <button type="submit" name="action" value="AjouterC" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Ajouter</button>
       </div>
+      </form>
         </div>
     <!-- /.modal-content --> 
   </div>
@@ -685,39 +667,56 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
         <h4 class="modal-title custom_align" id="Heading">Ajouter un manager</h4>
       </div>
+      <form action="ControllerServlet" method="Post">
           <div class="modal-body">
           <div class="form-group">
-        <input class="form-control" type="text" placeholder="IdManager" disabled>
+        <input class="form-control" type="text" name="IdManager" placeholder="IdManager" disabled>
         </div>
           <div class="form-group">
-        <input class="form-control" type="text" placeholder="Nom">
+        <input class="form-control" type="text" name="Nom" placeholder="Nom">
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" placeholder="Prenom">
+        <input class="form-control " type="text" name="Prenom" placeholder="Prenom">
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" placeholder="CIN">
+        <input class="form-control " type="text" name="CIN" placeholder="CIN">
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" placeholder="Login">
+        <input class="form-control " type="text" name="NCarteCredit" placeholder="NCarteCredit">
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" placeholder="Password">
-        </div>
-        <div class="form-group">
-        <input class="form-control " type="text" placeholder="NCarteCredis">
-        </div>
-        <div class="form-group">
-        <input class="form-control " type="text" placeholder="PermisConduite">
+        <input class="form-control " type="text" name="PermisConduite" placeholder="PermisConduite">
         </div>
       </div>
           <div class="modal-footer ">
-        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Ajouter</button>
+        <button type="submit" name="action" value="AjouterM" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Ajouter</button>
       </div>
+      </form>
         </div>
     <!-- /.modal-content --> 
   </div>
   </div>
+  <script>
+  $(document).ready(function () {
+      var theHREF;
+
+      $(".delete").click(function(e) {
+          e.preventDefault();
+          theHREF = $(this).attr("href");
+          $("#delete").modal("show");
+      });
+
+      $("#confirmModalNo").click(function(e) {
+          $("#delete").modal("hide");
+      });
+
+      $("#confirmModalYes").click(function(e) {
+          window.location.href = theHREF;
+      });
+  });
+	      
+  </script>
+  
     <!-- Jquery-2.2.4 js -->
     <script src="js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->

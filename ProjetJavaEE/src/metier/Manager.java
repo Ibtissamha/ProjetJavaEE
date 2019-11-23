@@ -7,8 +7,6 @@ public class Manager implements Serializable {
 	public int 	IdManager;
 	public String Nom;
 	public String Prenom;
-	public String Login;
-	public String Password;
 	public String CIN;
 	public String NCarteCredit;
 	public String PermisConduite;
@@ -29,18 +27,6 @@ public class Manager implements Serializable {
 	}
 	public void setPrenom(String prenom) {
 		Prenom = prenom;
-	}
-	public String getLogin() {
-		return Login;
-	}
-	public void setLogin(String login) {
-		Login = login;
-	}
-	public String getPassword() {
-		return Password;
-	}
-	public void setPassword(String password) {
-		Password = password;
 	}
 	public String getCIN() {
 		return CIN;
@@ -69,8 +55,6 @@ public class Manager implements Serializable {
 		IdManager = idManager;
 		Nom = nom;
 		Prenom = prenom;
-		Login = login;
-		Password = password;
 		CIN = cIN;
 		NCarteCredit = nCarteCredit;
 		PermisConduite = permisConduite;

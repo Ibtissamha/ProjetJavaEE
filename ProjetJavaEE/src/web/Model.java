@@ -10,6 +10,9 @@ import metier.Voiture;
 public class Model {
 	private String login;
 	private String password;
+	private String Erreur;
+	private Manager manager=new Manager();
+	private Client client=new Client();
 	private List<Voiture> voitures=new ArrayList<Voiture>();
 	private List<Voiture> voituresSolde=new ArrayList<Voiture>();
 	private List<Manager> managers=new ArrayList<Manager>();
@@ -66,6 +69,24 @@ public class Model {
 	}
 	public void setVoiture(Voiture voiture) {
 		this.voiture = voiture;
+	}
+	public Manager getManager() {
+		return manager;
+	}
+	public void setManager(Manager manager) {
+		this.manager = manager;
+	}
+	public String getErreur() {
+		return Erreur;
+	}
+	public void setErreur(String erreur) {
+		Erreur = erreur;
+	}
+	public Client getClient() {
+		return client;
+	}
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 }

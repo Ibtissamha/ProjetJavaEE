@@ -10,8 +10,6 @@ public class Client implements Serializable{
 	public String CIN;
 	public String Adresse;
 	public int Tel;
-	public String Login;
-	public String Password;
 	public int getIdClient() {
 		return IdClient;
 	}
@@ -48,18 +46,6 @@ public class Client implements Serializable{
 	public void setTel(int tel) {
 		Tel = tel;
 	}
-	public String getLogin() {
-		return Login;
-	}
-	public void setLogin(String login) {
-		Login = login;
-	}
-	public String getPassword() {
-		return Password;
-	}
-	public void setPassword(String password) {
-		Password = password;
-	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -72,8 +58,6 @@ public class Client implements Serializable{
 		CIN = cIN;
 		Adresse = adresse;
 		Tel = tel;
-		Login = login;
-		Password = password;
 	}
 	public Client() {
 		super();

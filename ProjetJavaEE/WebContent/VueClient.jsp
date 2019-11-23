@@ -149,7 +149,7 @@
                         <div class="col-10 col-sm-11">
                             <!-- Related Post Area -->
                                 <div class="single-widget-area about-me-widget text-center">
-                            <div class="widget-title">
+                            <div  class="widget-title">
                                 <h6>RECHERCHE DES VOITURES </h6>
                             </div>
                                 </div>
@@ -160,7 +160,7 @@
                 <div class="col-5 col-sm-6">
                             <div class="top_social_bar">
                                <b style="color:#FF4500"><a ><i class="fa fa-tags" aria-hidden="true"></i></a></b>
-                          <h6 style="color:gray"><spam>&nbsp&nbsp&nbsp</spam> <u> Recherche des Voitures :</u></h6>
+                          <h6 style="color:#FF4500"><spam>&nbsp&nbsp&nbsp</spam> <u> Recherche des Voitures :</u></h6>
                     </div>
                 </div>
                 <!--  Login Register Area -->

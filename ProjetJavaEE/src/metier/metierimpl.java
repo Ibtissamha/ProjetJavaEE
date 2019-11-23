@@ -97,8 +97,6 @@ public class metierimpl implements Imetier{
 				M.setIdManager(rs.getInt("IdManager"));
 				M.setNom(rs.getString("Nom"));
 				M.setPrenom(rs.getString("Prenom"));
-				M.setLogin(rs.getString("Login"));
-				M.setPassword(rs.getString("Password"));
 				M.setCIN(rs.getString("CIN"));
 				M.setNCarteCredit(rs.getString("NCarteCredit"));
 				M.setPermisConduite(rs.getString("PermisConduite"));
@@ -126,8 +124,6 @@ public class metierimpl implements Imetier{
 				C.setCIN(rs.getString("CIN"));
 				C.setAdresse(rs.getString("Adresse"));
 				C.setTel(rs.getInt("Tel"));
-				C.setLogin(rs.getString("Login"));
-				C.setPassword(rs.getString("Password"));
 				Cl.add(C);
 			}
 			vs.close();
@@ -136,5 +132,66 @@ public class metierimpl implements Imetier{
 		}
 		return Cl;
 	}
-
-}
+	@Override
+	public void addManager(Manager m) {
+		Connection conn=SingletonConnection.getConnection();
+		try {
+			PreparedStatement ps=conn.prepareStatement
+					("insert into Manager (Nom,Prenom,CIN,NCarteCredit,PermisConduite) values (?,?,?,?,?) ");
+			ps.setString(1, m.getNom());
+			ps.setString(2, m.getPrenom());
+			ps.setString(3, m.getCIN());
+			ps.setString(4, m.getNCarteCredit());
+			ps.setString(5, m.getPermisConduite());
+			ps.executeUpdate();
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	@Override
+	public void addClient(Client c) {
+		Connection conn=SingletonConnection.getConnection();
+		try {
+			PreparedStatement ps=conn.prepareStatement
+					("insert into Client (Nom,Prenom,CIN,Adresse,Tel) values (?,?,?,?,?) ");
+			ps.setString(1, c.getNom());
+			ps.setString(2, c.getPrenom());
+			ps.setString(3, c.getCIN());
+			ps.setString(4, c.getAdresse());
+			ps.setInt(5, c.getTel());
+			ps.executeUpdate();
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+		public void deleteManager(int id) 
+		{
+			Connection con=SingletonConnection.getConnection();
+			try {
+				PreparedStatement ps=con.prepareStatement
+						("delete from manager  where IdManager=? ");
+				ps.setInt(1, id);
+				ps.executeUpdate();
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		public void deleteClient(int id) 
+		{
+			Connection con=SingletonConnection.getConnection();
+			try {
+				PreparedStatement ps=con.prepareStatement
+						("delete from client  where IdClient=? ");
+				ps.setInt(1, id);
+				ps.executeUpdate();
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+	}

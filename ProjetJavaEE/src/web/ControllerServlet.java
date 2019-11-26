@@ -1,6 +1,8 @@
 package web;
 
+import metier.Password;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import metier.Client;
 import metier.Imetier;
@@ -21,17 +24,63 @@ public class ControllerServlet extends HttpServlet {
 	 private Imetier metier;
     public ControllerServlet() {
     	metier= new metierimpl();
-        
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action=request.getParameter("action");
 		String act=request.getParameter("act");
+		String ac=request.getParameter("ac");
+		if(ac != null)
+		{
+			if(ac.equals("ajax"))
+			{
+			String pass1=request.getParameter("Password");
+			String login1=request.getParameter("Name");
+			pass1=Password.hash(pass1);
+			String t=metier.checkUser(login1,pass1);
+			String[] g;
+		    if(t.equals("0&0")) response.getWriter().write("error");
+		    else
+		    	{
+		    	g=t.split("&");
+		    	HttpSession s=request.getSession();
+		    	s.setAttribute("id_user",Integer.parseInt(g[0]));
+		    	s.setAttribute("role",Integer.parseInt(g[1]));
+		    	response.getWriter().write("");
+		    	}
+			}
+			else if(ac.equals("ajaxIns"))
+			{
+				String Email,Nom,Prenom,CIN,Qs,Pass,Pass1,Adresse,Tel;
+				Email=request.getParameter("Email");Email=request.getParameter("Email");
+				Nom=request.getParameter("Nom");Prenom=request.getParameter("Prenom");
+				CIN=request.getParameter("Cin");Qs=request.getParameter("Qs");
+				Pass=request.getParameter("Password");Pass1=request.getParameter("Password1");
+				Adresse=request.getParameter("Adresse");Tel=request.getParameter("Tel");
+				if(Email.equals("") | Nom.equals("") | Prenom.equals("") | CIN.equals("") | Tel.equals("") | Qs.equals("") | Pass.equals("") | Pass1.equals("") | !Pass.equals(Pass1))
+					response.getWriter().write("ErrorReq");
+				else
+				{
+					Client c=new Client();
+					c.setNom(Nom);c.setPrenom(Prenom);c.setCIN(CIN);c.setAdresse(Adresse);c.setTel(Integer.parseInt(Tel));
+					c.setEmail(Email);c.setPass(Password.hash(Pass));c.setQs(Qs);
+					int t=c.save();
+					if(t!=0)
+					{
+						HttpSession s=request.getSession();
+						s.setAttribute("id_user",t);
+						s.setAttribute("role",1);
+						response.getWriter().write(t);
+					}
+					else response.getWriter().write("ErrorReq");
+				}
+			}
+		}
+		else {
 		Model model=new Model();
 		List<Voiture> voitures=metier.listVoitures();
 		model.setVoitures(voitures);
@@ -198,6 +247,18 @@ public class ControllerServlet extends HttpServlet {
 			  request.getRequestDispatcher("VueAdmin.jsp").forward(request, response);
 		}
 			 
+		else if(action.equals("logout"))
+		{
+			HttpSession s=request.getSession();
+			s.invalidate();
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
+		else if(action.equals("Reset"))
+		{
+			String email=request.getParameter("Email");
+			request.setAttribute("error","L'email n'exist pas dans la base de données !");
+			request.getRequestDispatcher("Reciperation.jsp").forward(request, response);
+		}
 		else {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
@@ -208,6 +269,6 @@ public class ControllerServlet extends HttpServlet {
 	  }
 
 		
-	}
+	}}
 
 }

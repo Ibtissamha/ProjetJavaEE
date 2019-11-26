@@ -1,6 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+      <% HttpSession s=request.getSession();
+      if(s.getAttribute("id_user")!=null)
+      {
+    	  if(((int)s.getAttribute("id_user"))!=0)
+    	  {
+    	 	 if(((int)s.getAttribute("role"))==3) 
+    	 		 response.sendRedirect(request.getContextPath()+"/VueAdmin.jsp");
+    	 	 else if(((int)s.getAttribute("role"))==2) 
+    	 		 response.sendRedirect(request.getContextPath()+"/VueManager.jsp");
+    	  }
+      }
+ else response.sendRedirect(request.getContextPath()+"/index.jsp");
+  
+ %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,14 +45,6 @@
         <div class="yummy-load"></div>
     </div>
 
-    <!-- Background Pattern Swither -->
-    <div id="pattern-switcher">
-        Bg Pattern.
-    </div>
-    <div id="patter-close">
-        <i class="fa fa-times" aria-hidden="true"></i>
-    </div>
-
     <!-- ****** Top Header Area Start ****** -->
     <div class="top_header_area">
         <div class="container">
@@ -58,12 +64,12 @@
                     <div class="signup-search-area d-flex align-items-center justify-content-end">
                         <div class="login_register_area d-flex">
                             <div class="register">
-                                <a href="">Deconnexion</a>
+                                <a href="<%=request.getContextPath()%>/ControllerServlet?action=logout">Deconnexion</a>
                             </div>
                         </div>
                         <!-- Search Button Area -->
                         <div class="search_button">
-                            <a class="searchBtn" href="ControllerServlet"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                            <a class="searchBtn" href="<%=request.getContextPath()%>/ControllerServlet?action=logout"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>

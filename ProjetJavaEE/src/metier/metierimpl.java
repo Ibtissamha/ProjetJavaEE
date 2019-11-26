@@ -1,9 +1,7 @@
 package metier;
+import metier.Password;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -213,6 +211,7 @@ public class metierimpl implements Imetier{
 			}
 			
 		}
+<<<<<<< HEAD
 		@Override
 		public void deleteVoiture(int id) 
 		{
@@ -274,3 +273,22 @@ public class metierimpl implements Imetier{
 			return vts;
 		}
 	}
+=======
+		public String checkUser(String login,String pass) {
+			int i=0,r=0;
+			Connection con=SingletonConnection.getConnection();
+			try {
+				
+				PreparedStatement ps=con.prepareStatement("SELECT id_user,role from user where username='"+login+"' and password='"+pass+"';");
+				ResultSet rs=ps.executeQuery();
+				while(rs.next()) {i=rs.getInt("id_user");r=rs.getInt("role");}
+				ps.close();
+				return i+"&"+r;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return "";
+			
+		}
+	}
+>>>>>>> branch 'master' of http://github.com/Ibtissamha/ProjetJavaEE

@@ -16,5 +16,6 @@ public interface Imetier {
 	public List<Voiture> VoituresParMC(String mc);
 	public void deleteVoiture(int id);
 	public void addVoiture(Voiture v);
+	public String checkUser(String login,String pass);
 	
 }

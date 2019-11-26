@@ -1,11 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+      <% HttpSession s=request.getSession();
+ if(s.getAttribute("id_user")!=null)
+ {
+	 if(((int)s.getAttribute("id_user"))!=0)
+	 {
+		 if(((int)s.getAttribute("role"))==2) 
+			 response.sendRedirect(request.getContextPath()+"/VueManager.jsp");
+		 else if(((int)s.getAttribute("role"))==1) 
+			 response.sendRedirect(request.getContextPath()+"/VueClient.jsp");
+	 }
+ }
+ else response.sendRedirect(request.getContextPath()+"/index.jsp");
+  
+ %>
 <!DOCTYPE html>
 <html lang="en">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="css/bootstrap3-3.css" rel="stylesheet">
+<script src="js/bootstrap3-3.js"></script>
+<script src="js/jquery1-1.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -33,13 +47,6 @@
         <div class="yummy-load"></div>
     </div>
 
-    <!-- Background Pattern Swither -->
-    <div id="pattern-switcher">
-        Bg Pattern.
-    </div>
-    <div id="patter-close">
-        <i class="fa fa-times" aria-hidden="true"></i>
-    </div>
 
     <!-- ****** Top Header Area Start ****** -->
     <div class="top_header_area">
@@ -60,12 +67,12 @@
                     <div class="signup-search-area d-flex align-items-center justify-content-end">
                         <div class="login_register_area d-flex">
                             <div class="register">
-                                <a href="">Deconnexion</a>
+                                <a href="<%=request.getContextPath()%>/ControllerServlet?action=logout">Deconnexion</a>
                             </div>
                         </div>
                         <!-- Search Button Area -->
                         <div class="search_button">
-                            <a class="searchBtn" href="ControllerServlet"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                            <a class="searchBtn" href="<%=request.getContextPath()%>/ControllerServlet?action=logout"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
@@ -150,7 +157,7 @@
                             <!-- Related Post Area -->
                                 <div class="single-widget-area about-me-widget text-center">
                             <div class="widget-title">
-                                <h6>RECHERCHE DES VOITURES </h6>
+                                <h6 style="font-size:14px;">RECHERCHE DES VOITURES </h6>
                             </div>
                                 </div>
                  <!-- ****** Top Header Area Start ****** -->
@@ -208,7 +215,7 @@
                                                 </div>
                                             </div>
                                             <a href="#">
-                                                <h6>The Top Breakfast And Brunch Spots In Hove</h6>
+                                                <h6 style="font-size:14px;">The Top Breakfast And Brunch Spots In Hove</h6>
                                             </a>
                                         </div>
                                     </div>
@@ -233,7 +240,7 @@
                                                 </div>
                                             </div>
                                             <a href="#">
-                                                <h6>The Top Breakfast And Brunch Spots In Hove</h6>
+                                                <h6 style="font-size:14px;">The Top Breakfast And Brunch Spots In Hove</h6>
                                             </a>
                                         </div>
                                     </div>
@@ -258,7 +265,7 @@
                                                 </div>
                                             </div>
                                             <a href="#">
-                                                <h6>The Top Breakfast And Brunch Spots In Hove</h6>
+                                                <h6 style="font-size:14px;">The Top Breakfast And Brunch Spots In Hove</h6>
                                             </a>
                                         </div>
                                     </div>
@@ -283,7 +290,7 @@
                                                 </div>
                                             </div>
                                             <a href="#">
-                                                <h6>The Top Breakfast And Brunch Spots In Hove</h6>
+                                                <h6 style="font-size:14px;">The Top Breakfast And Brunch Spots In Hove</h6>
                                             </a>
                                         </div>
                                     </div>
@@ -294,23 +301,23 @@
                             <div class="comment_area section_padding_50 clearfix">
                                  <div class="single-widget-area about-me-widget text-center">
                             <div class="widget-title">
-                                <h6>Visualiser les clients </h6>
+                                <h6 style="font-size:14px;">Visualiser les clients </h6>
                             </div>
                                 </div>
                          <table id="mytable" class="table-responsive table table-bordred table-striped">
                             <tr>
-                            <th>IdClient</th>  <th>Nom</th>  <th>Prenom</th> <th>CIN</th> <th>Adresse</th> <th>Tel</th> <th>Modifier</th> <th>Supprimer</th>
+                            <th style="font-size:11px;">IdClient</th>  <th style="font-size:11px;">Nom</th>  <th style="font-size:11px;">Prenom</th> <th style="font-size:11px;">CIN</th> <th style="font-size:11px;">Adresse</th> <th style="font-size:11px;">Tel</th> <th style="font-size:11px;">Modifier</th> <th style="font-size:11px;">Supprimer</th>
                             </tr>
                            <c:forEach items="${model.clients}" var="p">
                             <tr>
-                             <td>${p.idClient}</td> 
-                             <td>${p.nom}</td> 
-                             <td>${p.prenom}</td> 
-                             <td>${p.CIN}</td> 
-                             <td>${p.adresse}</td> 
-                             <td>${p.tel}</td> 
-                           <td><p data-placement="top" data-toggle="tooltip" title="EditC"><button class="btn btn-primary btn-xs" data-title="EditC" data-toggle="modal" data-target="#editC" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                           <td><p data-placement="top" data-toggle="tooltip" title="Delete"><a  href="ControllerServlet?action=deleteC&id=${p.idClient }" class="btn btn-danger btn-xs delete" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></a></p></td>
+                             <td style="font-size:11px;">${p.idClient}</td> 
+                             <td style="font-size:11px;">${p.nom}</td> 
+                             <td style="font-size:11px;">${p.prenom}</td> 
+                             <td style="font-size:11px;">${p.CIN}</td> 
+                             <td style="font-size:11px;">${p.adresse}</td> 
+                             <td style="font-size:11px;">${p.tel}</td> 
+                           <td style="font-size:11px;"><p data-placement="top" data-toggle="tooltip" title="EditC"><button class="btn btn-primary btn-xs" data-title="EditC" data-toggle="modal" data-target="#editC" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                           <td style="font-size:11px;"><p data-placement="top" data-toggle="tooltip" title="Delete"><a  href="ControllerServlet?action=deleteC&id=${p.idClient }" class="btn btn-danger btn-xs delete" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></a></p></td>
                            </tr>
                            </c:forEach>
                        </table> 
@@ -324,28 +331,28 @@
   <li><a href="#">5</a></li>
   <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li><br>
 </ol>
-  <p style="margin-top:50px; margin-left:444px;" data-placement="top" data-toggle="tooltip" title="AjouterC"><button class="btn  btn-outline-secondary btn-lg btn-block" data-title="AjouterC" data-toggle="modal" data-target="#AjouterC" ><span class="glyphicon glyphicon-plus"></span><span>&nbsp&nbsp</span>Ajouter</button></p>
+  <p style="margin-top:50px; margin-left:444px;" data-placement="top" data-toggle="tooltip" title="AjouterC"><button style="font-size: 1.5rem;" class="btn  btn-outline-secondary btn-lg btn-block" data-title="AjouterC" data-toggle="modal" data-target="#AjouterC" ><span class="glyphicon glyphicon-plus"></span><span>&nbsp&nbsp</span>Ajouter</button></p>
 
                          </div><br>
                              <div class="single-widget-area about-me-widget text-center">
                             <div class="widget-title">
-                                <h6>Visualiser les managers </h6>
+                                <h6 style="font-size:14px;">Visualiser les managers </h6>
                             </div>
                                 </div>
                                <table id="mytable" class="table-responsive table table-bordred table-striped" >
                             <tr>
-                            <th>IdManager</th>  <th>Nom</th>  <th>Prenom</th> <th>CIN</th> <th>NCarteCredit</th> <th>PermisConduite</th> <th>Modifier</th> <th>Supprimer</th>
+                            <th style="font-size:11px;">IdManager</th>  <th style="font-size:11px;">Nom</th>  <th style="font-size:11px;">Prenom</th> <th style="font-size:11px;">CIN</th> <th style="font-size:11px;">NCarteCredit</th> <th style="font-size:11px;">PermisConduite</th> <th style="font-size:11px;">Modifier</th> <th style="font-size:11px;">Supprimer</th>
                             </tr> 
                            <c:forEach items="${model.managers}" var="p">
                             <tr>
-                             <td>${p.idManager}</td> 
-                             <td>${p.nom}</td> 
-                             <td>${p.prenom}</td> 
-                             <td>${p.CIN}</td>
-                             <td>${p.NCarteCredit}</td>
-                             <td>${p.permisConduite}</td>
-                            <td><p data-placement="top" data-toggle="tooltip" title="EditM"><button class="btn btn-primary btn-xs" data-title="EditM" data-toggle="modal" data-target="#editM" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                           <td><p data-placement="top" data-toggle="tooltip"  title="Delete"><a  href="ControllerServlet?action=deleteM&id=${p.idManager }" class="btn btn-danger btn-xs delete" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></a></p></td>
+                             <td style="font-size:11px;">${p.idManager}</td> 
+                             <td style="font-size:11px;">${p.nom}</td> 
+                             <td style="font-size:11px;">${p.prenom}</td> 
+                             <td style="font-size:11px;">${p.CIN}</td>
+                             <td style="font-size:11px;">${p.NCarteCredit}</td>
+                             <td style="font-size:11px;">${p.permisConduite}</td>
+                            <td style="font-size:11px;"><p data-placement="top" data-toggle="tooltip" title="EditM"><button class="btn btn-primary btn-xs" data-title="EditM" data-toggle="modal" data-target="#editM" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                           <td style="font-size:11px;"><p data-placement="top" data-toggle="tooltip"  title="Delete"><a  href="ControllerServlet?action=deleteM&id=${p.idManager }" class="btn btn-danger btn-xs delete" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></a></p></td>
                           </tr>
                            </c:forEach>
                        </table>
@@ -359,7 +366,7 @@
   <li><a href="#">5</a></li>
   <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
 </ol>
- <p style="margin-top:50px; margin-left:444px;" data-placement="top" data-toggle="tooltip" title="AjouterM"><button class="btn  btn-outline-secondary btn-lg btn-block" data-title="AjouterM" data-toggle="modal" data-target="#AjouterM" ><span class="glyphicon glyphicon-plus"></span><span>&nbsp&nbsp</span>Ajouter</button></p>
+ <p style="margin-top:50px; margin-left:444px;" data-placement="top" data-toggle="tooltip" title="AjouterM"><button style="font-size: 1.5rem;" class="btn  btn-outline-secondary btn-lg btn-block" data-title="AjouterM" data-toggle="modal" data-target="#AjouterM" ><span class="glyphicon glyphicon-plus"></span><span>&nbsp&nbsp</span>Ajouter</button></p>
 
                         </div>
                     </div>
@@ -372,7 +379,7 @@
                         <!-- Single Widget Area -->
                         <div class="single-widget-area popular-post-widget">
                             <div class="widget-title text-center">
-                                <h6>Solde du mois</h6>
+                                <h6 style="font-size:14px;">Solde du mois</h6>
                             </div>
                            
                             <!-- Single Popular Post -->
@@ -381,7 +388,7 @@
                                 <img src="${p.chemin_img }" alt="">
                                 <div class="post-content">
                                     <a href="#">
-                                        <h6>${p.marque} ${p.modele} ${p.moteur}</h6>
+                                        <h6 style="font-size:14px;">${p.marque} ${p.modele} ${p.moteur}</h6>
                                     </a>
                                     <p>Solde de ${p.solde}%</p>
                                 </div>
@@ -406,7 +413,7 @@
                         <!-- Single Widget Area -->
                         <div class="single-widget-area newsletter-widget">
                             <div class="widget-title text-center">
-                                <h6>Contactez-Nous</h6>
+                                <h6 style="font-size:14px;">Contactez-Nous</h6>
                             </div>
                             <p>Vous pouvez nous contacter 24/24 h nous sommes a votre disposition .</p>
                             <div class="newsletter-form">
@@ -531,30 +538,30 @@
     <div class="modal-content">
           <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">Modifier ce client</h4>
+        <h4 style="font-size:16px;" class="modal-title custom_align" id="Heading">Modifier ce client</h4>
       </div>
           <div class="modal-body">
            <div class="form-group">
-        <input class="form-control" type="text" placeholder="IdClient" disabled>
+        <input style="font-size: 1.5rem;" class="form-control" type="text" placeholder="IdClient" disabled>
         </div>
           <div class="form-group">
-        <input class="form-control" type="text" placeholder="Nom">
+        <input style="font-size: 1.5rem;" class="form-control" type="text" placeholder="Nom">
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" placeholder="Prenom">
+        <input style="font-size: 1.5rem;" class="form-control " type="text" placeholder="Prenom">
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" placeholder="CIN">
+        <input style="font-size: 1.5rem;" class="form-control " type="text" placeholder="CIN">
         </div>
         <div class="form-group">
-        <textarea rows="2" class="form-control" placeholder="Adresse"></textarea>
+        <textarea font-size: 15px; rows="2" class="form-control" placeholder="Adresse"></textarea>
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" placeholder="Tel">
+        <input style="font-size: 1.5rem;" class="form-control " type="text" placeholder="Tel">
         </div>
       </div>
           <div class="modal-footer ">
-        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Modifier</button>
+        <button style="font-size: 1.5rem;" type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Modifier</button>
       </div>
         </div>
     <!-- /.modal-content --> 
@@ -567,30 +574,30 @@
     <div class="modal-content">
           <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">Modifier ce manager</h4>
+        <h4 style="font-size:16px;" class="modal-title custom_align" id="Heading">Modifier ce manager</h4>
       </div>
           <div class="modal-body">
-            <div class="form-group">
-        <input class="form-control" type="text" placeholder="IdManager" disabled>
+            <div class="form-group" font-size: 1.5rem;>
+        <input style="font-size: 1.5rem;" class="form-control" type="text" placeholder="IdManager" disabled>
         </div>
-          <div class="form-group">
-        <input class="form-control" type="text" placeholder="Nom">
-        </div>
-        <div class="form-group">
-        <input class="form-control " type="text" placeholder="Prenom">
+          <div class="form-group" font-size: 15px;>
+        <input style="font-size: 1.5rem;" class="form-control" type="text" placeholder="Nom">
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" placeholder="CIN">
+        <input style="font-size: 1.5rem;" class="form-control " type="text" placeholder="Prenom">
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" placeholder="NCarteCredis">
+        <input style="font-size: 1.5rem;" class="form-control " type="text" placeholder="CIN">
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" placeholder="PermisConduite">
+        <input style="font-size: 1.5rem;" class="form-control " type="text" placeholder="NCarteCredis">
+        </div>
+        <div class="form-group">
+        <input style="font-size: 1.5rem;" class="form-control " type="text" placeholder="PermisConduite">
         </div>
       </div>
           <div class="modal-footer ">
-        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Modifier</button>
+        <button style="font-size: 1.5rem;" type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Modifier</button>
       </div>
         </div>
     <!-- /.modal-content --> 
@@ -604,16 +611,16 @@
     <div class="modal-content">
           <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">Supprimer cette element</h4>
+        <h4 style="font-size:16px;" class="modal-title custom_align" id="Heading">Supprimer cette element</h4>
       </div>
           <div class="modal-body">
        
-       <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Vous etes sur que vous voulez supprimer?</div>
+       <div style="font-size: 15px;" class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Vous etes sur que vous voulez supprimer?</div>
        
       </div>
         <div class="modal-footer ">
-        <button type="button" class="btn btn-success" id="confirmModalYes"><span class="glyphicon glyphicon-ok-sign"></span> Oui</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal" id="confirmModalYes"><span class="glyphicon glyphicon-remove"></span> Non</button>
+        <button style="font-size: 1.5rem;"  type="button" class="btn btn-success" id="confirmModalYes"><span class="glyphicon glyphicon-ok-sign"></span> Oui</button>
+        <button style="font-size: 1.5rem;" type="button" class="btn btn-default" data-dismiss="modal" id="confirmModalYes"><span class="glyphicon glyphicon-remove"></span> Non</button>
       </div>
         </div>
     <!-- /.modal-content --> 
@@ -627,31 +634,31 @@
     <div class="modal-content">
           <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">Ajouter un client</h4>
+        <h4 style="font-size:16px;" class="modal-title custom_align" id="Heading">Ajouter un client</h4>
       </div>
        <form action="ControllerServlet" method="Post">
           <div class="modal-body">
           <div class="form-group">
-        <input class="form-control" type="text" name="IdClient" placeholder="IdClient" disabled>
+        <input style="font-size: 1.5rem;" class="form-control input-lg" type="text" name="IdClient" placeholder="IdClient" disabled>
         </div>
           <div class="form-group">
-        <input class="form-control" type="text" name="Nom" placeholder="Nom">
+        <input style="font-size: 1.5rem;" class="form-control" type="text" name="Nom" placeholder="Nom">
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" name="Prenom" placeholder="Prenom">
+        <input style="font-size: 1.5rem;" class="form-control " type="text" name="Prenom" placeholder="Prenom">
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" name="CIN" placeholder="CIN">
+        <input style="font-size: 1.5rem;" class="form-control " type="text" name="CIN" placeholder="CIN">
         </div>
         <div class="form-group">
-        <textarea rows="2" class="form-control" name="Adresse" placeholder="Adresse"></textarea>
+        <textarea style="font-size: 1.5rem;" rows="2" class="form-control" name="Adresse" placeholder="Adresse"></textarea>
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" name="Tel" placeholder="Tel">
+        <input style="font-size: 1.5rem;" class="form-control " type="text" name="Tel" placeholder="Tel">
         </div>
       </div>
           <div class="modal-footer ">
-        <button type="submit" name="action" value="AjouterC" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Ajouter</button>
+        <button style="font-size: 1.5rem;" type="submit" name="action" value="AjouterC" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Ajouter</button>
       </div>
       </form>
         </div>
@@ -665,31 +672,31 @@
     <div class="modal-content">
           <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">Ajouter un manager</h4>
+        <h4 style="font-size:16px;" class="modal-title custom_align" id="Heading">Ajouter un manager</h4>
       </div>
       <form action="ControllerServlet" method="Post">
           <div class="modal-body">
           <div class="form-group">
-        <input class="form-control" type="text" name="IdManager" placeholder="IdManager" disabled>
+        <input style="font-size: 1.5rem;" class="form-control" type="text" name="IdManager" placeholder="IdManager" disabled>
         </div>
           <div class="form-group">
-        <input class="form-control" type="text" name="Nom" placeholder="Nom">
+        <input style="font-size: 1.5rem;" class="form-control" type="text" name="Nom" placeholder="Nom">
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" name="Prenom" placeholder="Prenom">
+        <input style="font-size: 1.5rem;" class="form-control " type="text" name="Prenom" placeholder="Prenom">
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" name="CIN" placeholder="CIN">
+        <input style="font-size: 1.5rem;" class="form-control " type="text" name="CIN" placeholder="CIN">
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" name="NCarteCredit" placeholder="NCarteCredit">
+        <input style="font-size: 1.5rem;" class="form-control " type="text" name="NCarteCredit" placeholder="NCarteCredit">
         </div>
         <div class="form-group">
-        <input class="form-control " type="text" name="PermisConduite" placeholder="PermisConduite">
+        <input style="font-size: 1.5rem;" class="form-control " type="text" name="PermisConduite" placeholder="PermisConduite">
         </div>
       </div>
           <div class="modal-footer ">
-        <button type="submit" name="action" value="AjouterM" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Ajouter</button>
+        <button style="font-size: 1.5rem;" type="submit" name="action" value="AjouterM" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Ajouter</button>
       </div>
       </form>
         </div>

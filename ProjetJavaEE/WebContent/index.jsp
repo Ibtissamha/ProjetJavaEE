@@ -1,4 +1,19 @@
  <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ <% HttpSession s=request.getSession();
+ if(s.getAttribute("id_user")!=null)
+ {
+ if(((int)s.getAttribute("id_user"))!=0)
+ {
+	 if(((int)s.getAttribute("role"))==3) 
+		 response.sendRedirect(request.getContextPath()+"/VueAdmin.jsp");
+	 else if(((int)s.getAttribute("role"))==2) 
+		 response.sendRedirect(request.getContextPath()+"/VueManager.jsp");
+	 else if(((int)s.getAttribute("role"))==1) 
+		 response.sendRedirect(request.getContextPath()+"/VueClient.jsp");
+ }
+ }
+  
+ %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +34,61 @@
 
     <!-- Responsive CSS -->
     <link href="css/responsive/responsive.css" rel="stylesheet">
-
+    <script src="js/jquery1-1.js"></script>
+    <script type="text/javascript">
+    $(document).ready( function () {
+    	$("#Login").on("click",function(e){
+    		e.preventDefault();
+    		var data=$("#LoginForm").serializeArray();
+    		$.ajax({
+                method:"POST",
+               url:"<%=request.getContextPath()%>/ControllerServlet?ac=ajax",
+                data:data,
+                error:function () {
+                    console.log('Erreur');
+                },
+                success:function(data)
+                {
+                   
+                        if(data=="error"){
+                        	$("#LoginError").css("display","block");
+                        }
+                        else {
+                        	$("#LoginError").css("display","none");
+                        	window.location.href="<%=request.getContextPath()%>/ControllerServlet?action=Admin";
+                        }
+                   
+                }
+            });
+    	});
+    	$("#Register").on("click",function(e){
+    		e.preventDefault();
+    		var data=$("#RegisterForm").serializeArray();
+    		$.ajax({
+                method:"POST",
+               url:"<%=request.getContextPath()%>/ControllerServlet?ac=ajaxIns",
+                data:data,
+                error:function () {
+                    console.log('Erreur');
+                },
+                success:function(data)
+                {
+                   
+                        if(data=="ErrorReq"){
+                        	$("#RegisterError").css("display","block");
+                        }
+                        else {
+                        	$("#RegisterError").css("display","none");
+                        	window.location.href="<%=request.getContextPath()%>/index.jsp";
+                        }
+                   
+                }
+            });
+    	});
+    	
+    	
+        });
+    </script>
 </head>
 
 <body>
@@ -27,15 +96,6 @@
     <div id="preloader">
         <div class="yummy-load"></div>
     </div>
-    <!-- Background Pattern Swither -->
-    <div id="pattern-switcher">
-        Bg Pattern.
-    </div>
-    <div id="patter-close">
-        <i class="fa fa-times" aria-hidden="true"></i>
-    </div>
-  
-
     <!-- ****** Top Header Area Start ****** -->
     
        <div class="top_header_area">
@@ -116,7 +176,7 @@
                     <div class="single_catagory wow fadeInUp" data-wow-delay=".3s">
                         <img  height="240" width="350" src="img/catagory-img/1.jpg" alt="">
                         <div class="catagory-title">
-                            <a href="#">
+                            <a href="#" data-toggle="modal" data-target="#exampleModal">
                                 <h5>Voyage</h5>
                             </a>
                         </div>
@@ -126,7 +186,7 @@
                     <div class="single_catagory wow fadeInUp" data-wow-delay=".6s">
                         <img height="240" width="350" src="img/catagory-img/2.jpg" alt="">
                         <div class="catagory-title">
-                            <a href="#">
+                            <a href="#" data-toggle="modal" data-target="#exampleModal">
                                 <h5>Sport</h5>
                             </a>
                         </div>
@@ -136,7 +196,7 @@
                     <div class="single_catagory wow fadeInUp" data-wow-delay=".9s">
                         <img height="240" width="350" src="img/catagory-img/3.jpg" alt="">
                         <div class="catagory-title">
-                            <a href="#">
+                            <a href="#" data-toggle="modal" data-target="#exampleModal">
                                 <h5>Mariage</h5>
                             </a>
                         </div>
@@ -439,7 +499,7 @@
                                         <div class="yummy-table-cell">
                                             <h2>LUXE</h2>
                                             <p>Nouveautes!</p>
-                                            <a href="#" class="add-btn">A louer </a>
+                                            <a href="#" data-toggle="modal" data-target="#exampleModal" class="add-btn">A louer </a>
                                         </div>
                                     </div>
                                 </div>
@@ -577,33 +637,34 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="#" method="post" class="p-3">
+                    <form action="#" id="LoginForm" method="post" class="p-3">
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Username</label>
+                            <label for="recipient-name" class="col-form-label">Login</label>
                             <input type="text" class="form-control" placeholder=" " name="Name" id="recipient-name"
                                 required="">
                         </div>
                         <div class="form-group">
-                            <label for="password" class="col-form-label">Password</label>
+                            <label for="password" class="col-form-label">Mot de passe</label>
                             <input type="password" class="form-control" placeholder=" " name="Password" id="password"
                                 required="">
                         </div>
                         <div class="right-w3l">
-                            <input type="submit" class="form-control bg-theme" value="Login">
+                        <span id="LoginError" class="alert-danger" style="display:none;">Votre login ou mot de passe n'est pas correct !</span><br>
+                            <input type="submit" id="Login" class="form-control bg-theme" value="Login">
                         </div>
                         <div class="row sub-w3l my-3">
                             <div class="col sub-w3ltd">
                                 <input type="checkbox" id="brand1" value="">
                                 <label for="brand1" class="text-dark">
-                                    <span></span>Remember me?</label>
+                                    <span></span>Rester connecter?</label>
                             </div>
                             <div class="col forgot-w3l text-right">
-                                <a href="#" class="text-dark">Forgot Password?</a>
+                                <a href="#" class="text-dark">Mot de passe oublié?</a>
                             </div>
                         </div>
-                        <p class="text-center dont-do">Don't have an account?
+                        <p class="text-center dont-do">Vous n'etes pas inscrit?
                             <a href="#" data-toggle="modal" data-target="#exampleModal1" class="text-dark">
-                                <strong>Register Now</strong></a>
+                                <strong>Créer un compte</strong></a>
                         </p>
                     </form>
                 </div>
@@ -623,36 +684,54 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="#" method="post" class="p-3">
+                    <form action="#" method="post" class="p-3" id="RegisterForm">
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Username</label>
-                            <input type="text" class="form-control" placeholder=" " name="Name" id="recipient-rname"
-                                required="">
-                        </div>
-                        <div class="form-group">
+                        <span class="alert-danger" style="display:none;" id="RegisterError">Erreur de l'inscription</span>
                             <label for="recipient-email" class="col-form-label">Email</label>
                             <input type="email" class="form-control" placeholder=" " name="Email" id="recipient-email"
                                 required="">
                         </div>
                         <div class="form-group">
+                            <label for="recipient-email" class="col-form-label">Nom</label>
+                            <input type="email" class="form-control" placeholder=" " name="Nom" 
+                                required="">
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-form-label">Prénom</label>
+                            <input type="text" class="form-control" placeholder=" " name="Prenom" 
+                                required="">
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-form-label">CIN</label>
+                            <input type="text" class="form-control" placeholder=" " name="Cin"
+                                required="">
+                        </div>
+                        <div class="form-group">
+                        <label  class="col-form-label">Adresse</label>
+                            <textarea name="Adresse" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-form-label">GSM</label>
+                            <input type="text" class="form-control" placeholder=" " name="Tel"
+                                required="">
+                        </div>
+                        <div class="form-group">
                             <label for="password1" class="col-form-label">Password</label>
-                            <input type="password" class="form-control" placeholder=" " name="Password" id="password1"
+                            <input type="password" class="form-control" placeholder=" " name="Password"
                                 required="">
                         </div>
                         <div class="form-group">
                             <label for="password2" class="col-form-label">Confirm Password</label>
-                            <input type="password" class="form-control" placeholder=" " name="Confirm Password" id="password2"
+                            <input type="password" class="form-control" placeholder=" " name="Password1"
                                 required="">
                         </div>
-                        <div class="sub-w3l">
-                            <div class="sub-w3ltd">
-                                <input type="checkbox" id="brand2" value="">
-                                <label for="brand2" class="mb-3 text-dark">
-                                    <span></span>I Accept to the Terms & Conditions</label>
-                            </div>
+                        <div class="form-group">
+                            <label class="col-form-label">Quel est le nom et le prénom de votre grand père?</label>
+                            <input type="text" class="form-control" placeholder=" " name="Qs"
+                                required="">
                         </div>
                         <div class="right-w3l">
-                            <input type="submit" class="form-control bg-theme" value="Register">
+                            <input type="submit" class="form-control bg-theme" id="Register" value="Register">
                         </div>
                     </form>
                 </div>

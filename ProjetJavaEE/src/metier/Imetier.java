@@ -12,5 +12,9 @@ public interface Imetier {
 	public void addClient(Client c);
 	public void deleteManager(int id);
 	public void deleteClient(int id) ;
+	public void updateClient(Client client);
+	public List<Voiture> VoituresParMC(String mc);
+	public void deleteVoiture(int id);
+	public void addVoiture(Voiture v);
 	
 }

@@ -192,4 +192,20 @@ public class metierimpl implements Imetier{
 			}
 			
 		}
+		public String checkUser(String login,String pass) {
+			int i=0,r=0;
+			Connection con=SingletonConnection.getConnection();
+			try {
+				
+				PreparedStatement ps=con.prepareStatement("SELECT id_user,role from user where username='"+login+"' and password='"+pass+"';");
+				ResultSet rs=ps.executeQuery();
+				while(rs.next()) {i=rs.getInt("id_user");r=rs.getInt("role");}
+				ps.close();
+				return i+"&"+r;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return "";
+			
+		}
 	}

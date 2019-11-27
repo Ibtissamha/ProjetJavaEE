@@ -8,27 +8,6 @@ import java.util.List;
 public class metierimpl implements Imetier{
 
 	@Override
-	public List<Personne> listPersonnes() {
-		List<Personne> per=new ArrayList<Personne>();
-		Connection conn=SingletonConnection.getConnection();
-		try {
-			PreparedStatement ps=conn.prepareStatement("select * from members ");
-			ResultSet rs=ps.executeQuery();
-			while(rs.next()) {
-				Personne p=new Personne();
-				p.setId(rs.getInt("id"));
-				p.setPseudo(rs.getString("pseudo"));
-				p.setMail(rs.getString("mail"));
-				per.add(p);
-			}
-			ps.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return per;
-	}
-
-	@Override
 	public List<Voiture> listVoitures() {
 		
 		List<Voiture> voit=new ArrayList<Voiture>();
@@ -45,7 +24,6 @@ public class metierimpl implements Imetier{
 				v.setMoteur(rs.getString("Moteur"));
 				v.setPrix(rs.getDouble("Prix"));
 				v.setChemin_img(rs.getString("chemin_img"));
-				v.setImg_V(rs.getBlob("img_V"));
 				v.setSolde(rs.getInt("solde"));
 				voit.add(v);
 			}
@@ -72,7 +50,6 @@ public class metierimpl implements Imetier{
 				v.setMoteur(rs.getString("Moteur"));
 				v.setPrix(rs.getDouble("Prix"));
 				v.setChemin_img(rs.getString("chemin_img"));
-				v.setImg_V(rs.getBlob("img_V"));
 				v.setSolde(rs.getInt("solde"));
 				voit.add(v);
 			}

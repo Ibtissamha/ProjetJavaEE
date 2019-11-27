@@ -1,25 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-      <% HttpSession s=request.getSession();
- if(s.getAttribute("id_user")!=null)
- {
-	 if(((int)s.getAttribute("id_user"))!=0)
-	 {
-		 if(((int)s.getAttribute("role"))==2) 
-			 response.sendRedirect(request.getContextPath()+"/VueManager.jsp");
-		 else if(((int)s.getAttribute("role"))==1) 
-			 response.sendRedirect(request.getContextPath()+"/VueClient.jsp");
-	 }
- }
- else response.sendRedirect(request.getContextPath()+"/index.jsp");
-  
- %>
 <!DOCTYPE html>
 <html lang="en">
-<link href="css/bootstrap3-3.css" rel="stylesheet">
-<script src="js/bootstrap3-3.js"></script>
-<script src="js/jquery1-1.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -38,6 +24,7 @@
 
     <!-- Responsive CSS -->
     <link href="css/responsive/responsive.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -46,6 +33,13 @@
         <div class="yummy-load"></div>
     </div>
 
+    <!-- Background Pattern Swither -->
+    <div id="pattern-switcher">
+        Bg Pattern.
+    </div>
+    <div id="patter-close">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </div>
 
     <!-- ****** Top Header Area Start ****** -->
     <div class="top_header_area">
@@ -66,12 +60,12 @@
                     <div class="signup-search-area d-flex align-items-center justify-content-end">
                         <div class="login_register_area d-flex">
                             <div class="register">
-                                <a href="<%=request.getContextPath()%>/ControllerServlet?action=logout">Deconnexion</a>
+                                <a href="">Deconnexion</a>
                             </div>
                         </div>
                         <!-- Search Button Area -->
                         <div class="search_button">
-                            <a class="searchBtn" href="<%=request.getContextPath()%>/ControllerServlet?action=logout"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                            <a class="searchBtn" href="ControllerServlet"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
@@ -100,7 +94,7 @@
                         <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
                             <ul class="navbar-nav" id="yummy-nav">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="ControllerServlet?action=Admin">Accueil <span class="sr-only">(current)</span></a>
+                                    <a class="nav-link" href="ControllerServlet?action=Manager">Accueil <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="ControllerServlet?action=Archive">Archive</a>
@@ -156,7 +150,7 @@
                             <!-- Related Post Area -->
                                 <div class="single-widget-area about-me-widget text-center">
                             <div class="widget-title">
-                                <h6 style="font-size:14px;">RECHERCHE DES VOITURES </h6>
+                                <h6>RECHERCHE DES VOITURES </h6>
                             </div>
                                 </div>
                  <!-- ****** Top Header Area Start ****** -->
@@ -180,7 +174,7 @@
                         <div class="search-hidden-form">
                             <form action="ControllerServlet" method="Post">
                                 <input type="search" name="search" id="search-anything" placeholder="Saisir la marque que vous desirer">
-                                <input type="submit" name="action" value="Cherch" class="d-none">
+                                <input type="submit" name="action" value="Voit" class="d-none">
                                 <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
                             </form>
                         </div>
@@ -208,86 +202,19 @@
                                                 </div>
                                             </div>
                                             <a href="#">
-                                                <h6 style="font-size:14px;">${v.marque} ${v.modele} ${v.moteur}</h6>
+                                                <h6>${v.marque} ${v.modele} ${v.moteur}</h6>
                                             </a>
                                         </div>
+ <p style="padding-left:70px;" data-placement="Top" data-toggle="tooltip" ><button class="btn btn-primary btn-xs" data-title="EditM" data-toggle="modal" data-target="#editV" ><span class="glyphicon glyphicon-pencil"></span></button>
+<a  href="ControllerServlet?action=deleteV&id=${v.idVoiture }" class="btn btn-danger btn-xs delete" data-title="delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></a></p>
+                          
                                     </div>
                                     </c:forEach>
                                 </div>
+ <p style="margin-top:50px; margin-left:444px;" data-placement="top" data-toggle="tooltip" title="AjouterV"><button class="btn  btn-outline-secondary btn-lg btn-block" data-title="AjouterV" data-toggle="modal" data-target="#AjouterV" ><b style="color:#FF4500"><span class="glyphicon glyphicon-plus"></span><span>&nbsp&nbsp</span>Ajouter Voiture</b></button></p>
+ 
                             </div>
-
-                            <!-- Comment Area Start -->
-                            <div class="comment_area section_padding_50 clearfix">
-                                 <div class="single-widget-area about-me-widget text-center">
-                            <div class="widget-title">
-                                <h6 style="font-size:14px;">Visualiser les clients </h6>
-                            </div>
-                                </div>
-                         <table id="mytable" class="table-responsive table table-bordred table-striped">
-                            <tr>
-                            <th style="font-size:11px;">IdClient</th>  <th style="font-size:11px;">Nom</th>  <th style="font-size:11px;">Prenom</th> <th style="font-size:11px;">CIN</th> <th style="font-size:11px;">Adresse</th> <th style="font-size:11px;">Tel</th> <th style="font-size:11px;">Modifier</th> <th style="font-size:11px;">Supprimer</th>
-                            </tr>
-                           <c:forEach items="${model.clients}" var="p">
-                            <tr>
-                             <td style="font-size:11px;">${p.idClient}</td> 
-                             <td style="font-size:11px;">${p.nom}</td> 
-                             <td style="font-size:11px;">${p.prenom}</td> 
-                             <td style="font-size:11px;">${p.CIN}</td> 
-                             <td style="font-size:11px;">${p.adresse}</td> 
-                             <td style="font-size:11px;">${p.tel}</td> 
-                           <td style="font-size:11px;"><p data-placement="top" data-toggle="tooltip" title="EditC"><button class="btn btn-primary btn-xs" data-title="EditC" data-toggle="modal" data-target="#editC" data-id="${p.idClient }" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                           <td style="font-size:11px;"><p data-placement="top" data-toggle="tooltip" title="Delete"><a  href="ControllerServlet?action=deleteC&id=${p.idClient }" class="btn btn-danger btn-xs delete" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></a></p></td>
-                           </tr>
-                           </c:forEach>
-                       </table> 
-                       <div class="clearfix"></div>
-<ol class="pagination pull-right">
-  <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
-  <li class="active"><a href="#">1</a></li>
-  <li><a href="#">2</a></li>
-  <li><a href="#">3</a></li>
-  <li><a href="#">4</a></li>
-  <li><a href="#">5</a></li>
-  <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li><br>
-</ol>
-  <p style="margin-top:50px; margin-left:444px;" data-placement="top" data-toggle="tooltip" title="AjouterC"><button style="font-size: 1.5rem;" class="btn  btn-outline-secondary btn-lg btn-block" data-title="AjouterC" data-toggle="modal" data-target="#AjouterC" ><span class="glyphicon glyphicon-plus"></span><span>&nbsp&nbsp</span>Ajouter</button></p>
-
-                         </div><br>
-                             <div class="single-widget-area about-me-widget text-center">
-                            <div class="widget-title">
-                                <h6 style="font-size:14px;">Visualiser les managers </h6>
-                            </div>
-                                </div>
-                               <table id="mytable" class="table-responsive table table-bordred table-striped" >
-                            <tr>
-                            <th style="font-size:11px;">IdManager</th>  <th style="font-size:11px;">Nom</th>  <th style="font-size:11px;">Prenom</th> <th style="font-size:11px;">CIN</th> <th style="font-size:11px;">NCarteCredit</th> <th style="font-size:11px;">PermisConduite</th> <th style="font-size:11px;">Modifier</th> <th style="font-size:11px;">Supprimer</th>
-                            </tr> 
-                           <c:forEach items="${model.managers}" var="p">
-                            <tr>
-                             <td style="font-size:11px;">${p.idManager}</td> 
-                             <td style="font-size:11px;">${p.nom}</td> 
-                             <td style="font-size:11px;">${p.prenom}</td> 
-                             <td style="font-size:11px;">${p.CIN}</td>
-                             <td style="font-size:11px;">${p.NCarteCredit}</td>
-                             <td style="font-size:11px;">${p.permisConduite}</td>
-                            <td style="font-size:11px;"><p data-placement="top" data-toggle="tooltip" title="EditM"><button class="btn btn-primary btn-xs" data-title="EditM" data-toggle="modal" data-target="#editM" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                           <td style="font-size:11px;"><p data-placement="top" data-toggle="tooltip"  title="Delete"><a  href="ControllerServlet?action=deleteM&id=${p.idManager }" class="btn btn-danger btn-xs delete" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></a></p></td>
-                          </tr>
-                           </c:forEach>
-                       </table>
-                         <div class="clearfix"></div>
-<ol class="pagination pull-right">
-  <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
-  <li class="active"><a href="#">1</a></li>
-  <li><a href="#">2</a></li>
-  <li><a href="#">3</a></li>
-  <li><a href="#">4</a></li>
-  <li><a href="#">5</a></li>
-  <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
-</ol>
- <p style="margin-top:50px; margin-left:444px;" data-placement="top" data-toggle="tooltip" title="AjouterM"><button style="font-size: 1.5rem;" class="btn  btn-outline-secondary btn-lg btn-block" data-title="AjouterM" data-toggle="modal" data-target="#AjouterM" ><span class="glyphicon glyphicon-plus"></span><span>&nbsp&nbsp</span>Ajouter</button></p>
-
-                        </div>
+                           </div>
                     </div>
                 </div>
 
@@ -298,7 +225,7 @@
                         <!-- Single Widget Area -->
                         <div class="single-widget-area popular-post-widget">
                             <div class="widget-title text-center">
-                                <h6 style="font-size:14px;">Solde du mois</h6>
+                                <h6>Solde du mois</h6>
                             </div>
                            
                             <!-- Single Popular Post -->
@@ -307,7 +234,7 @@
                                 <img src="${p.chemin_img }" alt="">
                                 <div class="post-content">
                                     <a href="#">
-                                        <h6 style="font-size:14px;">${p.marque} ${p.modele} ${p.moteur}</h6>
+                                        <h6>${p.marque} ${p.modele} ${p.moteur}</h6>
                                     </a>
                                     <p>Solde de ${p.solde}%</p>
                                 </div>
@@ -329,20 +256,6 @@
                             </div>
                         </div>
 
-                        <!-- Single Widget Area -->
-                        <div class="single-widget-area newsletter-widget">
-                            <div class="widget-title text-center">
-                                <h6 style="font-size:14px;">Contactez-Nous</h6>
-                            </div>
-                            <p>Vous pouvez nous contacter 24/24 h nous sommes a votre disposition .</p>
-                            <div class="newsletter-form">
-                                <form action="#" method="post">
-                                    <input type="email" name="newsletter-email" id="email" placeholder="Votre email">
-                                    <button type="submit"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -424,7 +337,7 @@
                             <div class="collapse navbar-collapse justify-content-center" id="yummyfood-footer-nav">
                                 <ul class="navbar-nav">
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="ControllerServlet?action=Admin">Accueil <span class="sr-only">(current)</span></a>
+                                        <a class="nav-link" href="ControllerServlet?action=Manager">Accueil <span class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="ControllerServlet?action=Archive">Archive</a>
@@ -451,75 +364,44 @@
             </div>
         </div>
     </footer>
-    
-<div class="modal fade" id="editC" tabindex="-1" role="dialog" aria-labelledby="editC" aria-hidden="true">
-      <div class="modal-dialog">
-    <div class="modal-content">
-          <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 style="font-size:16px;" class="modal-title custom_align" id="Heading">Modifier ce client</h4>
-      </div>
-      <form action="" method="Post">
-          <div class="modal-body">
-           <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control" type="text" placeholder="IdClient" disabled>
-        </div>
-          <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control" type="text" placeholder="Nom">
-        </div>
-        <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control " type="text" placeholder="Prenom">
-        </div>
-        <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control " type="text" placeholder="CIN">
-        </div>
-        <div class="form-group">
-        <textarea font-size: 15px; rows="2" class="form-control" placeholder="Adresse"></textarea>
-        </div>
-        <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control " type="text" placeholder="Tel">
-        </div>
-      </div>
-          <div class="modal-footer ">
-        <button type="submit" style="font-size: 1.5rem;" name="action" value="ModifierC" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Modifier</button>
-      </div>
-      </form>
-        </div>
-    <!-- /.modal-content --> 
-  </div>
-  </div>
   
       
-<div class="modal fade" id="editM" tabindex="-1" role="dialog" aria-labelledby="editM" aria-hidden="true">
+<div class="modal fade" id="editV" tabindex="-1" role="dialog" aria-labelledby="editV" aria-hidden="true">
       <div class="modal-dialog">
     <div class="modal-content">
           <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 style="font-size:16px;" class="modal-title custom_align" id="Heading">Modifier ce manager</h4>
+        <h4 class="modal-title custom_align" id="Heading">Modifier cette voiture</h4>
       </div>
       <form action="ControllerServlet" method="Post">
           <div class="modal-body">
-            <div class="form-group" font-size: 1.5rem;>
-        <input style="font-size: 1.5rem;" class="form-control" type="text" placeholder="IdManager" disabled>
+            <div class="form-group">
+         <input class="form-control" type="text" name="IdVoiture" placeholder="IdVoiture" disabled>
         </div>
-          <div class="form-group" font-size: 15px;>
-        <input style="font-size: 1.5rem;" class="form-control" type="text" placeholder="Nom">
-        </div>
-        <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control " type="text" placeholder="Prenom">
+          <div class="form-group">
+        <input class="form-control" type="text" name="Matricule" placeholder="Matricule">
         </div>
         <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control " type="text" placeholder="CIN">
+        <input class="form-control " type="text" name="Modele" placeholder="Modele">
         </div>
         <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control " type="text" placeholder="NCarteCredis">
+        <input class="form-control " type="text" name="Marque" placeholder="Marque">
         </div>
         <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control " type="text" placeholder="PermisConduite">
+        <input class="form-control " type="text" name="Moteur" placeholder="Moteur">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" name="Prix" placeholder="Prix">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" name="chemin_img" placeholder="chemin_img">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" name="Solde" placeholder="Solde">
         </div>
       </div>
           <div class="modal-footer ">
-        <button style="font-size: 1.5rem;" type="submit" name="action" value="ModifierM" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Modifier</button>
+        <button type="submit" name="action" value="AjouterV" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Ajouter</button>
       </div>
       </form>
         </div>
@@ -529,97 +411,68 @@
   
   
   
-   <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
       <div class="modal-dialog">
     <div class="modal-content">
           <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 style="font-size:16px;" class="modal-title custom_align" id="Heading">Supprimer cette element</h4>
+        <h4 class="modal-title custom_align" id="Heading">Supprimer cette voiture</h4>
       </div>
           <div class="modal-body">
        
-       <div style="font-size: 15px;" class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Vous etes sur que vous voulez supprimer?</div>
+       <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Vous etes sur que vous voulez supprimer?</div>
        
       </div>
         <div class="modal-footer ">
-        <button style="font-size: 1.5rem;"  type="button" class="btn btn-success" id="confirmModalYes"><span class="glyphicon glyphicon-ok-sign"></span> Oui</button>
-        <button style="font-size: 1.5rem;" type="button" class="btn btn-default" data-dismiss="modal" id="confirmModalYes"><span class="glyphicon glyphicon-remove"></span> Non</button>
+        <button type="button" class="btn btn-success" id="confirmModalYes"><span class="glyphicon glyphicon-ok-sign"></span> Oui</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="confirmModalYes"><span class="glyphicon glyphicon-remove"></span> Non</button>
       </div>
         </div>
     <!-- /.modal-content --> 
   </div>
       <!-- /.modal-dialog --> 
     </div>
+      <!-- /.modal-dialog --> 
+    </div>
     <!-- ****** Footer Menu Area End ****** -->
-
-<div class="modal fade" id="AjouterC" tabindex="-1" role="dialog" aria-labelledby="AjouterC" aria-hidden="true">
+  
+  
+<div class="modal fade" id="AjouterV" tabindex="-1" role="dialog" aria-labelledby="AjouterV" aria-hidden="true">
       <div class="modal-dialog">
     <div class="modal-content">
           <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 style="font-size:16px;" class="modal-title custom_align" id="Heading">Ajouter un client</h4>
-      </div>
-       <form action="ControllerServlet" method="Post">
-          <div class="modal-body">
-          <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control input-lg" type="text" name="IdClient" placeholder="IdClient" disabled>
-        </div>
-          <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control" type="text" name="Nom" placeholder="Nom">
-        </div>
-        <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control " type="text" name="Prenom" placeholder="Prenom">
-        </div>
-        <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control " type="text" name="CIN" placeholder="CIN">
-        </div>
-        <div class="form-group">
-        <textarea style="font-size: 1.5rem;" rows="2" class="form-control" name="Adresse" placeholder="Adresse"></textarea>
-        </div>
-        <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control " type="text" name="Tel" placeholder="Tel">
-        </div>
-      </div>
-          <div class="modal-footer ">
-        <button style="font-size: 1.5rem;" type="submit" name="action" value="AjouterC" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Ajouter</button>
-      </div>
-      </form>
-        </div>
-    <!-- /.modal-content --> 
-  </div>
-  </div>
-  
-  
-<div class="modal fade" id="AjouterM" tabindex="-1" role="dialog" aria-labelledby="AjouterM" aria-hidden="true">
-      <div class="modal-dialog">
-    <div class="modal-content">
-          <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 style="font-size:16px;" class="modal-title custom_align" id="Heading">Ajouter un manager</h4>
+        <h4 class="modal-title custom_align" id="Heading">Ajouter une voiture</h4>
       </div>
       <form action="ControllerServlet" method="Post">
           <div class="modal-body">
           <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control" type="text" name="IdManager" placeholder="IdManager" disabled>
+        <input class="form-control" type="text" name="IdVoiture" placeholder="IdVoiture" disabled>
         </div>
           <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control" type="text" name="Nom" placeholder="Nom">
+        <input class="form-control" type="text" name="Matricule" placeholder="Matricule">
         </div>
         <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control " type="text" name="Prenom" placeholder="Prenom">
+        <input class="form-control " type="text" name="Modele" placeholder="Modele">
         </div>
         <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control " type="text" name="CIN" placeholder="CIN">
+        <input class="form-control " type="text" name="Marque" placeholder="Marque">
         </div>
         <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control " type="text" name="NCarteCredit" placeholder="NCarteCredit">
+        <input class="form-control " type="text" name="Moteur" placeholder="Moteur">
         </div>
         <div class="form-group">
-        <input style="font-size: 1.5rem;" class="form-control " type="text" name="PermisConduite" placeholder="PermisConduite">
+        <input class="form-control " type="text" name="Prix" placeholder="Prix">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" name="chemin_img" placeholder="chemin_img">
+        </div>
+        <div class="form-group">
+        <input class="form-control " type="text" name="Solde" placeholder="Solde">
         </div>
       </div>
           <div class="modal-footer ">
-        <button style="font-size: 1.5rem;" type="submit" name="action" value="AjouterM" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Ajouter</button>
+        <button type="submit" name="action" value="AjouterV" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Ajouter</button>
       </div>
       </form>
         </div>
@@ -645,7 +498,7 @@
       });
   });
   
-	      
+        
   </script>
   
     <!-- Jquery-2.2.4 js -->

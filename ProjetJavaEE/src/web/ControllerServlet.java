@@ -110,6 +110,18 @@ public class ControllerServlet extends HttpServlet {
 			request.setAttribute("model", model);
 			request.getRequestDispatcher("VueAdmin.jsp").forward(request, response);
 		}
+		else if(action.equals("Manager"))
+		{
+			request.getRequestDispatcher("VueManager.jsp").forward(request, response);
+		}
+		else if(action.equals("Voit"))
+		{
+			model.setMarque(request.getParameter("search"));
+			  List<Voiture> voit=metier.VoituresParMC(model.getMarque());
+			  model.setVoituresMC(voit);
+			request.getRequestDispatcher("VueManager.jsp").forward(request, response);
+			
+		}
 		else if(action.equals("AjouterM")) 
 		{ 
 			List<Manager> managers=metier.listManagers();
@@ -150,6 +162,24 @@ public class ControllerServlet extends HttpServlet {
 			  }
 			request.getRequestDispatcher("VueAdmin.jsp").forward(request, response);
 		}
+		else if(action.equals("AjouterV")) 
+		{ 
+			
+	    	try {
+			  model.getVoiture().setMatricule(request.getParameter("Matricule"));
+			  model.getVoiture().setModele(request.getParameter("Modele"));
+			  model.getVoiture().setMarque(request.getParameter("Marque"));
+			  model.getVoiture().setMoteur(request.getParameter("Moteur"));
+			  model.getVoiture().setPrix(Double.parseDouble(request.getParameter("Prix")));
+			  model.getVoiture().setChemin_img(request.getParameter("chemin_img"));
+			  model.getVoiture().setSolde(Integer.parseInt(request.getParameter("Solde")));
+			  metier.addVoiture(model.getVoiture());
+			  model.setVoitures(metier.listVoitures()); 
+			  }catch(Exception e) {
+			  model.setErreur(e.getMessage()); 
+			  }
+			request.getRequestDispatcher("VueManager.jsp").forward(request, response);
+		}
 		else if(action.equals("deleteM"))
 		{
 			List<Manager> managers=metier.listManagers();
@@ -161,6 +191,13 @@ public class ControllerServlet extends HttpServlet {
 			metier.deleteManager(id);
 			model.setManagers(metier.listManagers());
 			request.getRequestDispatcher("VueAdmin.jsp").forward(request, response);
+		}
+		else if(action.equals("deleteV"))
+		{
+			int id=Integer.parseInt(request.getParameter("id"));
+			metier.deleteVoiture(id);
+			model.setVoitures(metier.listVoitures());
+			request.getRequestDispatcher("VueManager.jsp").forward(request, response);
 		}
 		else if(action.equals("deleteC"))
 		{
@@ -174,6 +211,42 @@ public class ControllerServlet extends HttpServlet {
 			model.setClients(metier.listClient());
 			request.getRequestDispatcher("VueAdmin.jsp").forward(request, response);
 		}
+		else if(action.equals("ModifierC"))
+		{
+			List<Manager> managers=metier.listManagers();
+			model.setManagers(managers);
+			List<Client> clients=metier.listClient();
+			model.setClients(clients);
+			request.setAttribute("model", model);
+			model.getClient().setNom(request.getParameter("Nom"));
+			model.getClient().setPrenom(request.getParameter("Prenom"));
+			model.getClient().setCIN(request.getParameter("CIN"));
+			model.getClient().setAdresse(request.getParameter("Adresse"));
+	        model.getClient().setTel(Integer.parseInt(request.getParameter("Tel")));
+			metier.updateClient(model.getClient());
+			model.setClients(metier.listClient());
+			request.getRequestDispatcher("VueAdmin.jsp").forward(request, response);
+		}
+		else if(action.equals("Chercher"))
+		{
+			model.setMarque(request.getParameter("search"));
+			List<Voiture> voit=metier.VoituresParMC(model.getMarque());
+			  model.setVoituresMC(voit);
+			  request.getRequestDispatcher("VueClient.jsp").forward(request, response);
+		}
+		else if(action.equals("Cherch"))
+		{
+			List<Manager> managers=metier.listManagers();
+			model.setManagers(managers);
+			List<Client> clients=metier.listClient();
+			model.setClients(clients);
+			request.setAttribute("model", model);
+			model.setMarque(request.getParameter("search"));
+			List<Voiture> voit=metier.VoituresParMC(model.getMarque());
+			  model.setVoituresMC(voit);
+			  request.getRequestDispatcher("VueAdmin.jsp").forward(request, response);
+		}
+			 
 		else if(action.equals("logout"))
 		{
 			HttpSession s=request.getSession();

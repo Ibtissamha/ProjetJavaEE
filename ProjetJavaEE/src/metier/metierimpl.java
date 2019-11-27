@@ -125,6 +125,25 @@ public class metierimpl implements Imetier{
 		}
 	}
 	@Override
+	public void addVoiture(Voiture v) {
+		Connection conn=SingletonConnection.getConnection();
+		try {
+			PreparedStatement ps=conn.prepareStatement
+					("insert into voiture (Matricule,Modele,Marque,Moteur,Prix,chemin_img,Solde) values (?,?,?,?,?,?,?) ");
+			ps.setString(1, v.getMatricule());
+			ps.setString(2, v.getModele());
+			ps.setString(3, v.getMarque());
+			ps.setString(4, v.getMoteur());
+			ps.setDouble(5, v.getPrix());
+			ps.setString(6, v.getChemin_img());
+			ps.setInt(7, v.getSolde());
+			ps.executeUpdate();
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	@Override
 	public void addClient(Client c) {
 		Connection conn=SingletonConnection.getConnection();
 		try {
@@ -141,6 +160,7 @@ public class metierimpl implements Imetier{
 			e.printStackTrace();
 		}
 	}
+	@Override
 		public void deleteManager(int id) 
 		{
 			Connection con=SingletonConnection.getConnection();
@@ -155,6 +175,7 @@ public class metierimpl implements Imetier{
 			}
 			
 		}
+		@Override
 		public void deleteClient(int id) 
 		{
 			Connection con=SingletonConnection.getConnection();
@@ -169,6 +190,67 @@ public class metierimpl implements Imetier{
 			}
 			
 		}
+		@Override
+		public void deleteVoiture(int id) 
+		{
+			Connection con=SingletonConnection.getConnection();
+			try {
+				PreparedStatement ps=con.prepareStatement
+						("delete from voiture  where IdVoiture=? ");
+				ps.setInt(1, id);
+				ps.executeUpdate();
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+
+		@Override
+		public void updateClient(Client c) {
+			Connection conn=SingletonConnection.getConnection();
+			try {
+				PreparedStatement ps=conn.prepareStatement
+						("update Client set Nom=? ,Prenom=? ,CIN=? ,Adresse=?, Tel=? where IdClient=? ");
+				ps.setString(1, c.getNom());
+				ps.setString(2, c.getPrenom());
+				ps.setString(3, c.getCIN());
+				ps.setString(4, c.getAdresse());
+				ps.setInt(5, c.getTel());
+				ps.setInt(5, c.getIdClient());
+				ps.executeUpdate();
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		public List<Voiture> VoituresParMC(String mc) {
+			List<Voiture> vts=new ArrayList<Voiture>();
+			Connection conn=SingletonConnection.getConnection();
+			try {
+				PreparedStatement ps=conn.prepareStatement("select * from voiture where Marque like ?");
+				ps.setString(1,"%"+mc+"%");
+				ResultSet rs=ps.executeQuery();
+				while(rs.next()) {
+					Voiture v=new Voiture();
+					v.setIdVoiture(Integer.parseInt(rs.getString("IdVoiture")));
+					v.setMatricule(rs.getString("Matricule"));
+					v.setModele(rs.getString("Modele"));
+					v.setMarque(rs.getString("Marque"));
+					v.setMoteur(rs.getString("Moteur"));
+					v.setPrix(rs.getDouble("Prix"));
+					v.setChemin_img(rs.getString("chemin_img"));
+					v.setSolde(rs.getInt("solde"));
+					vts.add(v);
+				}
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return vts;
+		}
+
 		public String checkUser(String login,String pass) {
 			int i=0,r=0;
 			Connection con=SingletonConnection.getConnection();
@@ -185,4 +267,4 @@ public class metierimpl implements Imetier{
 			return "";
 			
 		}
-	}
+}

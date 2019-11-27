@@ -178,9 +178,9 @@
                         </div>
                         <!-- Search Form -->
                         <div class="search-hidden-form">
-                            <form action="#" method="get">
+                            <form action="ControllerServlet" method="Post">
                                 <input type="search" name="search" id="search-anything" placeholder="Saisir la marque que vous desirer">
-                                <input type="submit" value="" class="d-none">
+                                <input type="submit" name="action" value="Chercher" class="d-none">
                                 <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
                             </form>
                         </div>
@@ -194,105 +194,25 @@
                             <div class="related-post-area section_padding_50">
                                 <div class="related-post-slider owl-carousel">
                                     <!-- Single Related Post-->
+                                    <c:forEach items="${model.voituresMC}" var="v">
                                     <div class="single-post">
                                         <!-- Post Thumb -->
                                         <div class="post-thumb">
-                                            <img src="img/blog-img/15.jpg" alt="">
+                                            <img width="100" height="180"  src="${v.chemin_img }" alt="">
                                         </div>
                                         <!-- Post Content -->
                                         <div class="post-content">
                                             <div class="post-meta d-flex">
                                                 <div class="post-author-date-area d-flex">
-                                                    <!-- Post Author -->
-                                                    <div class="post-author">
-                                                        <a href="#">By Marian</a>
-                                                    </div>
-                                                    <!-- Post Date -->
-                                                    <div class="post-date">
-                                                        <a href="#">May 19, 2017</a>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                             <a href="#">
-                                                <h6>The Top Breakfast And Brunch Spots In Hove</h6>
+                                                <h6>${v.marque} ${v.modele} ${v.moteur}</h6>
                                             </a>
                                         </div>
                                     </div>
-                                    <!-- Single Related Post-->
-                                    <div class="single-post">
-                                        <!-- Post Thumb -->
-                                        <div class="post-thumb">
-                                            <img src="img/blog-img/5.jpg" alt="">
-                                        </div>
-                                        <!-- Post Content -->
-                                        <div class="post-content">
-                                            <div class="post-meta d-flex">
-                                                <div class="post-author-date-area d-flex">
-                                                    <!-- Post Author -->
-                                                    <div class="post-author">
-                                                        <a href="#">By Marian</a>
-                                                    </div>
-                                                    <!-- Post Date -->
-                                                    <div class="post-date">
-                                                        <a href="#">May 19, 2017</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <a href="#">
-                                                <h6>The Top Breakfast And Brunch Spots In Hove</h6>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <!-- Single Related Post-->
-                                    <div class="single-post">
-                                        <!-- Post Thumb -->
-                                        <div class="post-thumb">
-                                            <img src="img/blog-img/16.jpg" alt="">
-                                        </div>
-                                        <!-- Post Content -->
-                                        <div class="post-content">
-                                            <div class="post-meta d-flex">
-                                                <div class="post-author-date-area d-flex">
-                                                    <!-- Post Author -->
-                                                    <div class="post-author">
-                                                        <a href="#">By Marian</a>
-                                                    </div>
-                                                    <!-- Post Date -->
-                                                    <div class="post-date">
-                                                        <a href="#">May 19, 2017</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <a href="#">
-                                                <h6>The Top Breakfast And Brunch Spots In Hove</h6>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <!-- Single Related Post-->
-                                    <div class="single-post">
-                                        <!-- Post Thumb -->
-                                        <div class="post-thumb">
-                                            <img src="img/blog-img/5.jpg" alt="">
-                                        </div>
-                                        <!-- Post Content -->
-                                        <div class="post-content">
-                                            <div class="post-meta d-flex">
-                                                <div class="post-author-date-area d-flex">
-                                                    <!-- Post Author -->
-                                                    <div class="post-author">
-                                                        <a href="#">By Marian</a>
-                                                    </div>
-                                                    <!-- Post Date -->
-                                                    <div class="post-date">
-                                                        <a href="#">May 19, 2017</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <a href="#">
-                                                <h6>The Top Breakfast And Brunch Spots In Hove</h6>
-                                            </a>
-                                        </div>
-                                    </div>
+                                     </c:forEach>
                                 </div>
                             </div>
 

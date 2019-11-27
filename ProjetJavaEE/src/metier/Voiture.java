@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Blob;
 
 public class Voiture implements Serializable{
+	private static final long serialVersionUID = 1L;
 	public int IdVoiture;
 	public String Matricule;
 	public String Modele;
@@ -76,6 +77,8 @@ public class Voiture implements Serializable{
 	}
 	public void setPrix(double prix) {
 		Prix = prix;
+	
+	
 	}
 
 }

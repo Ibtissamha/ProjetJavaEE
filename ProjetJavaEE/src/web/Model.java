@@ -11,9 +11,12 @@ public class Model {
 	private String login;
 	private String password;
 	private String Erreur;
+	private String Marque;
 	private Manager manager=new Manager();
 	private Client client=new Client();
+	private Voiture voiture=new Voiture();
 	private List<Voiture> voitures=new ArrayList<Voiture>();
+	private List<Voiture> voituresMC=new ArrayList<Voiture>();
 	private List<Voiture> voituresSolde=new ArrayList<Voiture>();
 	private List<Manager> managers=new ArrayList<Manager>();
 	private List<Client> clients=new ArrayList<Client>();
@@ -35,7 +38,6 @@ public class Model {
 	public void setVoituresSolde(List<Voiture> voituresSolde) {
 		this.voituresSolde = voituresSolde;
 	}
-	private Voiture voiture=new Voiture();
 	public String getLogin() {
 		return login;
 	}
@@ -87,6 +89,18 @@ public class Model {
 	}
 	public void setClient(Client client) {
 		this.client = client;
+	}
+	public String getMarque() {
+		return Marque;
+	}
+	public void setMarque(String marque) {
+		Marque = marque;
+	}
+	public List<Voiture> getVoituresMC() {
+		return voituresMC;
+	}
+	public void setVoituresMC(List<Voiture> voituresMC) {
+		this.voituresMC = voituresMC;
 	}
 
 }
